@@ -35,13 +35,15 @@ export default class ProductService {
         return this.client;
     };
 
-    getPaged = (page: number, pageSize: number, filters: ProductFilter | null): Promise<ProductPagedResponse> => {
-        return this.init().get(`/GetPaged`, {
-            params: {
-                page,
-                pageSize,
-                filters
+    getPaged = (page: number, pageSize: number, productFilter: ProductFilter | null): Promise<ProductPagedResponse> => {
+        return this.init().post(`/GetPaged?page=${page}&pageSize=${pageSize}`, productFilter).then(response => {
+            if (!response || !response.data) {
+                throw new Error('Response is undefined or does not contain data');
             }
+            return response.data;
+        }).catch(error => {
+            console.error('Error in getPaged:', error);
+            throw error;
         });
     };
 
