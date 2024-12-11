@@ -1,0 +1,6 @@
+export interface ShipmentCompany {
+    shipmentCompanyId?: number | null;
+    companyName: string;
+    companySite?: string | null;
+    companyLogoUrl?: string | null;
+}
