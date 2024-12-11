@@ -1,4 +1,4 @@
-export interface Address {
+export type Address = {
   addressId?: number | null;
   userId?: number | null;
   countryId: number;

@@ -1,6 +1,6 @@
 import { OrderItem } from './OrderItem';
 
-export interface Order {
+export type Order = {
     orderId?: number | null;
     addressId: number;
     shipmentCompanyId?: number | null;

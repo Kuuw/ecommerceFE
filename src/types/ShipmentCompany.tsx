@@ -1,4 +1,4 @@
-export interface ShipmentCompany {
+export type ShipmentCompany = {
     shipmentCompanyId?: number | null;
     companyName: string;
     companySite?: string | null;

@@ -1,7 +1,7 @@
 import { Product } from './Product';
 import { PageMetadata } from './PageMetadata';
 
-export interface ProductPagedResponse {
+export type ProductPagedResponse = {
     items: Product[];
     metadata: PageMetadata;
 }

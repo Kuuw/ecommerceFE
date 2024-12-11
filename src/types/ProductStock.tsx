@@ -1,4 +1,4 @@
-export interface ProductStock {
+export type ProductStock = {
     productId?: number | null;
     name?: string | null;
     description?: string | null;
