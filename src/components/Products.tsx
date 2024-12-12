@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useProductService from '../hooks/useProductService';
 import { Product } from '../types/Product';
 import axios from 'axios';
-import { ProductFilter } from '../types/ProductFilter';
+import ProductCard from './card/ProductCard';
 
 const Products: React.FC = () => {
     const productService = new useProductService();
@@ -11,7 +11,7 @@ const Products: React.FC = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
-    const [pageSize, setPageSize] = useState<number>(10);
+    const [pageSize, setPageSize] = useState<number>(12);
 
     const fetchProducts = async () => {
         try {
@@ -49,25 +49,19 @@ const Products: React.FC = () => {
         }
     };
 
-    const handleReload = () => {
-        fetchProducts();
-    };
-
     return (
         <div>
-            <h1>Products</h1>
-            <button onClick={handleReload}>Reload</button>
-            <ul>
+            <div className="flex flex-wrap">
                 {products.map(product => (
-                    <li key={product.productId}>{product.name}</li>
+                    <ProductCard product={product} />
                 ))}
-            </ul>
-            <div>
-                <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+            </div>
+            <div className='paging-container'>
+                <button onClick={handlePreviousPage} disabled={currentPage === 1} className='paging-button'>
                     Previous
                 </button>
                 <span>Page {currentPage} of {totalPages}</span>
-                <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+                <button onClick={handleNextPage} disabled={currentPage === totalPages} className='paging-button'>
                     Next
                 </button>
             </div>
