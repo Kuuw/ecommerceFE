@@ -14,7 +14,7 @@ export default class CategoryService {
     constructor() {
         this.api_token = undefined;
         this.client = null;
-        this.api_url = process.env.REACT_APP_API_ENDPOINT + "/Category";
+        this.api_url = import.meta.env.VITE_REACT_APP_API_ENDPOINT + "/Category";
     }
 
     init = (): AxiosInstance => {

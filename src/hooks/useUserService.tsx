@@ -12,7 +12,7 @@ export default class UserService {
     constructor() {
         this.api_token = undefined;
         this.client = null;
-        this.api_url = process.env.REACT_APP_API_ENDPOINT + "/User";
+        this.api_url = import.meta.env.VITE_REACT_APP_API_ENDPOINT + "/User";
     }
 
     init = (): AxiosInstance => {
@@ -35,8 +35,8 @@ export default class UserService {
         return this.client;
     };
 
-    login = (login: UserLogin): Promise<AuthenticateResponse | undefined> => {
-        return this.init().post("/Login", { body: { login } });
+    login = (email: string, password: string): Promise<AuthenticateResponse | undefined> => {
+        return this.init().post("/Login", { email, password });
     };
 
     register = (model: UserModel): Promise<any> => {

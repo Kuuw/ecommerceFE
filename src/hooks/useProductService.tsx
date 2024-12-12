@@ -12,7 +12,7 @@ export default class ProductService {
     constructor() {
         this.api_token = undefined;
         this.client = null;
-        this.api_url = process.env.REACT_APP_API_ENDPOINT + "/Product";
+        this.api_url = import.meta.env.VITE_REACT_APP_API_ENDPOINT + "/Product";
     }
 
     init = (): AxiosInstance => {

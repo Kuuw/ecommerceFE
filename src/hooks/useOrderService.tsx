@@ -14,7 +14,7 @@ export default class OrderService {
     constructor() {
         this.api_token = undefined;
         this.client = null;
-        this.api_url = process.env.REACT_APP_API_ENDPOINT + "/Order";
+        this.api_url = import.meta.env.VITE_REACT_APP_API_ENDPOINT + "/Order";
     }
 
     init = (): AxiosInstance => {

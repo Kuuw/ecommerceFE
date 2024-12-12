@@ -14,7 +14,7 @@ export default class AddressService {
     constructor() {
         this.api_token = undefined;
         this.client = null;
-        this.api_url = process.env.REACT_APP_API_ENDPOINT + "/Address";
+        this.api_url = import.meta.env.VITE_REACT_APP_API_ENDPOINT + "/Address";
     }
 
     init = (): AxiosInstance => {
