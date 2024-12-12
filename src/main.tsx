@@ -1,10 +1,54 @@
-import { StrictMode } from 'react';
+import { StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
-import Products from './components/Products';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import React from 'react';
+import Navbar from './components/Navbar';
+import HomeView from './views/HomeView';
+import SignInView from './views/account/SignInView';
+/* import SignUpView from './views/account/SignUpView';
+import ForgotPasswordView from './views/account/ForgotPasswordView';
+import MyProfileView from './views/account/MyProfileView';
+import OrdersView from './views/order/OrdersView';
+import ProductListView from './views/product/ProductListView';
+import ProductDetailView from './views/product/ProductDetailView';
+import CartView from './views/order/CartView';
+import CheckoutView from './views/order/CheckoutView';
+import ContactUsView from './views/ContactUsView';
+import InternalServerErrorView from './views/error/InternalServerErrorView';
+import NotFoundView from './views/error/NotFoundView'; */
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Products />
-  </StrictMode>,
+    <BrowserRouter>
+      <React.Fragment>
+        <Navbar />
+        <Suspense
+          fallback={
+            <div className="text-white text-center mt-3">Loading...</div>
+          }
+        >
+          <Routes>
+            <Route path="/" element={<HomeView />} />
+            <Route path="/account/signin" element={<SignInView />} />
+            {/*<Route path="/account/signup" element={<SignUpView />} />
+            <Route
+              path="/account/forgotpassword"
+              element={<ForgotPasswordView />}
+            />
+            <Route path="/account/profile" element={<MyProfileView />} />
+            <Route path="/account/orders" element={<OrdersView />} />
+            <Route path="/category" element={<ProductListView />} />
+            <Route path="/product/detail" element={<ProductDetailView />} />
+            <Route path="/cart" element={<CartView />} />
+            <Route path="/checkout" element={<CheckoutView />} />
+            <Route path="/contact-us" element={<ContactUsView />} />
+            <Route path="/500" element={<InternalServerErrorView />} />
+            <Route path="*" element={<NotFoundView />} /> */}
+
+          </Routes>
+        </Suspense>
+      </React.Fragment>
+    </BrowserRouter>
+  </StrictMode>
 );
