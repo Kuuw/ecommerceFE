@@ -1,6 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
 import Cookies from 'js-cookie';
-import { UserLogin } from '../types/UserLogin';
 import { UserModel } from '../types/UserModel';
 import { AuthenticateResponse } from '../types/AuthenticateResponse';
 
@@ -39,8 +38,8 @@ export default class UserService {
         return this.init().post("/Login", { email, password });
     };
 
-    register = (model: UserModel): Promise<any> => {
-        return this.init().post("/Register", { body: { model } });
+    register = (firstName: string, lastName: string, email: string, password: string): Promise<any> => {
+        return this.init().post("/Register", { firstName, lastName, email, password });
     };
 
     get = (userId: number): Promise<UserModel> => {
@@ -48,6 +47,6 @@ export default class UserService {
     };
 
     put = (model: UserModel): Promise<any> => {
-        return this.init().put("", { body: { model } });
+        return this.init().put("", { model });
     };
 }

@@ -42,7 +42,7 @@ export default class AddressService {
     };
 
     post = (model: Address): Promise<any> => {
-        return this.init().post(``, { body: { model } });
+        return this.init().post(``, { model });
     };
 
     delete = (addressId: number): Promise<any> => {
@@ -50,6 +50,6 @@ export default class AddressService {
     };
 
     put = (addressId: number, model: Address): Promise<any> => {
-        return this.init().put(`/${addressId}`, { body: { model } });
+        return this.init().put(`/${addressId}`, { model });
     };
 }

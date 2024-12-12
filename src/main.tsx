@@ -6,8 +6,8 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import HomeView from './views/HomeView';
 import SignInView from './views/account/SignInView';
-/* import SignUpView from './views/account/SignUpView';
-import ForgotPasswordView from './views/account/ForgotPasswordView';
+import SignUpView from './views/account/SignUpView';
+/* import ForgotPasswordView from './views/account/ForgotPasswordView';
 import MyProfileView from './views/account/MyProfileView';
 import OrdersView from './views/order/OrdersView';
 import ProductListView from './views/product/ProductListView';
@@ -31,8 +31,8 @@ createRoot(document.getElementById('root')!).render(
           <Routes>
             <Route path="/" element={<HomeView />} />
             <Route path="/account/signin" element={<SignInView />} />
-            {/*<Route path="/account/signup" element={<SignUpView />} />
-            <Route
+            <Route path="/account/signup" element={<SignUpView />} />
+            {/*<Route
               path="/account/forgotpassword"
               element={<ForgotPasswordView />}
             />
