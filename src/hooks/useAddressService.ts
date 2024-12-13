@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import Cookies from 'js-cookie';
 import { Address } from '../types/Address';
+import { AxiosData } from '../types/AxiosData';
 
 export interface Addresses {
     results: Address[];
@@ -37,19 +38,19 @@ export default class AddressService {
         return this.client;
     };
 
-    get = (): Promise<Addresses> => {
+    get = (): Promise<AxiosData<Addresses>> => {
         return this.init().get(``, {});
     };
 
-    post = (model: Address): Promise<any> => {
-        return this.init().post(``, { model });
+    post = (model: Address): Promise<AxiosData<any>> => {
+        return this.init().post(``, model);
     };
 
-    delete = (addressId: number): Promise<any> => {
+    delete = (addressId: number): Promise<AxiosData<any>> => {
         return this.init().delete(`/${addressId}`);
     };
 
-    put = (addressId: number, model: Address): Promise<any> => {
-        return this.init().put(`/${addressId}`, { model });
+    put = (addressId: number, model: Address): Promise<AxiosData<any>> => {
+        return this.init().put(`/${addressId}`, model);
     };
 }

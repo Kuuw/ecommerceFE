@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import Cookies from 'js-cookie';
 import { Category } from '../types/Category';
+import { AxiosData } from '../types/AxiosData';
 
 export interface Categories {
     results: Category[];
@@ -37,23 +38,23 @@ export default class CategoryService {
         return this.client;
     };
 
-    get = (): Promise<Categories> => {
+    get = (): Promise<AxiosData<Categories>> => {
         return this.init().get(``, {});
     };
 
-    getById = (categoryId: number): Promise<Category> => {
+    getById = (categoryId: number): Promise<AxiosData<Category>> => {
         return this.init().get(`/${categoryId}`, {});
     };
 
-    post = (model: Category): Promise<any> => {
-        return this.init().post(``, { body: { model } });
+    post = (model: Category): Promise<AxiosData<any>> => {
+        return this.init().post(``, model);
     };
 
-    delete = (categoryId: number): Promise<any> => {
+    delete = (categoryId: number): Promise<AxiosData<any>> => {
         return this.init().delete(`/${categoryId}`);
     };
 
-    put = (categoryId: number, model: Category): Promise<any> => {
-        return this.init().put(`/${categoryId}`, { body: { model } });
+    put = (categoryId: number, model: Category): Promise<AxiosData<any>> => {
+        return this.init().put(`/${categoryId}`, model);
     };
 }

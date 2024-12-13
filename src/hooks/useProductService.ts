@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import { Product } from '../types/Product';
 import { ProductPagedResponse } from '../types/ProductPagedResponse';
 import { ProductFilter } from '../types/ProductFilter';
+import { AxiosData } from '../types/AxiosData';
 
 export default class ProductService {
     private api_token: string | undefined;
@@ -35,39 +36,31 @@ export default class ProductService {
         return this.client;
     };
 
-    getPaged = (page: number, pageSize: number, productFilter: ProductFilter | null): Promise<ProductPagedResponse> => {
-        return this.init().post(`/GetPaged?page=${page}&pageSize=${pageSize}`, productFilter).then(response => {
-            if (!response || !response.data) {
-                throw new Error('Response is undefined or does not contain data');
-            }
-            return response.data;
-        }).catch(error => {
-            console.error('Error in getPaged:', error);
-            throw error;
-        });
+    getPaged = (page: number, pageSize: number, productFilter: ProductFilter | null): Promise<AxiosData<ProductPagedResponse>> => {
+        return this.init().post(`/GetPaged?page=${page}&pageSize=${pageSize}`, productFilter);
     };
 
     getById = (productId: number): Promise<Product> => {
         return this.init().get(`/${productId}`, {});
     };
 
-    post = (model: Product): Promise<any> => {
-        return this.init().post(``, { body: { model } });
+    post = (model: Product): Promise<AxiosData<any>> => {
+        return this.init().post(``, { model });
     };
 
-    delete = (productId: number): Promise<any> => {
+    delete = (productId: number): Promise<AxiosData<any>> => {
         return this.init().delete(`/${productId}`);
     };
 
-    put = (productId: number, model: Product): Promise<any> => {
-        return this.init().put(`/${productId}`, { body: { model } });
+    put = (productId: number, model: Product): Promise<AxiosData<any>> => {
+        return this.init().put(`/${productId}`, { model });
     };
 
-    updateStock = (productId: number, stock: number): Promise<any> => {
-        return this.init().put(`/${productId}`, { params: { stock } });
+    updateStock = (productId: number, stock: number): Promise<AxiosData<any>> => {
+        return this.init().put(`/${productId}`, { stock });
     };
 
-    addImage = (productId: number, file: File): Promise<any> => {
+    addImage = (productId: number, file: File): Promise<AxiosData<any>> => {
         const formData = new FormData();
         formData.append('file', file);
 
@@ -80,7 +73,7 @@ export default class ProductService {
         });
     };
 
-    deleteImage = (imageGuid: string): Promise<any> => {
+    deleteImage = (imageGuid: string): Promise<AxiosData<any>> => {
         return this.init().delete(`/Image/${imageGuid}`);
     };
 }

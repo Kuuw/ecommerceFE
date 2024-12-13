@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 import Cookies from 'js-cookie';
 import { CartItem } from '../types/CartItem';
 import { Cart } from '../types/Cart';
+import { AxiosData } from '../types/AxiosData';
 
 export default class CartService {
     private api_token: string | undefined;
@@ -34,15 +35,15 @@ export default class CartService {
         return this.client;
     };
 
-    get = (): Promise<Cart> => {
+    get = (): Promise<AxiosData<Cart>> => {
         return this.init().get(``, {});
     };
 
-    delete = (productId: number): Promise<any> => {
+    delete = (productId: number): Promise<AxiosData<any>> => {
         return this.init().delete(`/${productId}`);
     };
 
-    put = (model: CartItem): Promise<any> => {
-        return this.init().put(``, { body: { model } });
+    put = (model: CartItem): Promise<AxiosData<any>> => {
+        return this.init().put(``, model);
     };
 }

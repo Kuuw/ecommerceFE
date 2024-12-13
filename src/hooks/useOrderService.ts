@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import Cookies from 'js-cookie';
 import { Order } from '../types/Order';
+import { AxiosData } from '../types/AxiosData';
 
 export interface Orders {
     results: Order[];
@@ -37,15 +38,15 @@ export default class OrderService {
         return this.client;
     };
 
-    get = (): Promise<Orders> => {
+    get = (): Promise<AxiosData<Orders>> => {
         return this.init().get(``, {});
     };
 
-    getById = (orderId: number): Promise<Order> => {
+    getById = (orderId: number): Promise<AxiosData<Order>> => {
         return this.init().get(`/${orderId}`, {});
     };
 
-    post = (model: Order): Promise<any> => {
-        return this.init().post(``, { body: { model } });
+    post = (model: Order): Promise<AxiosData<any>> => {
+        return this.init().post(``, model);
     };
 }

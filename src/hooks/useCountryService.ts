@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import Cookies from 'js-cookie';
 import { Country } from '../types/Country';
+import { AxiosData } from '../types/AxiosData';
 
 export interface Countries {
     results: Country[];
@@ -37,23 +38,23 @@ export default class CountryService {
         return this.client;
     };
 
-    get = (): Promise<Countries> => {
+    get = (): Promise<AxiosData<Countries>> => {
         return this.init().get(``, {});
     };
 
-    getById = (categoryId: number): Promise<Country> => {
+    getById = (categoryId: number): Promise<AxiosData<Country>> => {
         return this.init().get(`/${categoryId}`, {});
     };
 
-    post = (model: Country): Promise<any> => {
-        return this.init().post(``, { body: { model } });
+    post = (model: Country): Promise<AxiosData<any>> => {
+        return this.init().post(``, model);
     };
 
-    delete = (countryId: number): Promise<any> => {
+    delete = (countryId: number): Promise<AxiosData<any>> => {
         return this.init().delete(`/${countryId}`);
     };
 
-    put = (countryId: number, model: Country): Promise<any> => {
-        return this.init().put(`/${countryId}`, { body: { model } });
+    put = (countryId: number, model: Country): Promise<AxiosData<any>> => {
+        return this.init().put(`/${countryId}`, model);
     };
 }

@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import Cookies from 'js-cookie';
 import { ShipmentCompany } from '../types/ShipmentCompany';
+import { AxiosData } from '../types/AxiosData';
 
 export interface ShipmentCompanies {
     results: ShipmentCompany[];
@@ -37,23 +38,23 @@ export default class ShipmentCompanyService {
         return this.client;
     };
 
-    get = (): Promise<ShipmentCompanies> => {
+    get = (): Promise<AxiosData<ShipmentCompanies>> => {
         return this.init().get(``, {});
     };
 
-    getById = (shipmentCompanyId: number): Promise<ShipmentCompany> => {
+    getById = (shipmentCompanyId: number): Promise<AxiosData<ShipmentCompany>> => {
         return this.init().get(`/${shipmentCompanyId}`, {});
     };
 
-    post = (model: ShipmentCompany): Promise<any> => {
-        return this.init().post(``, { body: { model } });
+    post = (model: ShipmentCompany): Promise<AxiosData<any>> => {
+        return this.init().post(``, { model });
     };
 
-    delete = (shipmentCompanyId: number): Promise<any> => {
+    delete = (shipmentCompanyId: number): Promise<AxiosData<any>> => {
         return this.init().delete(`/${shipmentCompanyId}`);
     };
 
-    put = (shipmentCompanyId: number, model: ShipmentCompany): Promise<any> => {
-        return this.init().put(`/${shipmentCompanyId}`, { body: { model } });
+    put = (shipmentCompanyId: number, model: ShipmentCompany): Promise<AxiosData<any>> => {
+        return this.init().put(`/${shipmentCompanyId}`, { model });
     };
 }
