@@ -1,12 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
+
 const Navbar: React.FC = () => {
+    const navigate = useNavigate();
     const token = Cookies.get('token');
     const LogOut = () => {
         Cookies.remove('token');
-        window.location.href = '/account/signin';
+        Cookies.remove('firstName');
+        Cookies.remove('lastName');
+        navigate('/account/signin');
     };
 
     return (

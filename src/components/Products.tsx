@@ -17,9 +17,13 @@ const Products: React.FC = () => {
         try {
             const response = await getPaged(currentPage, pageSize, filters);
             console.log('API Response:', response);
-            setProducts(response.items);
-            setTotalPages(response.metadata.totalPages);
-            setPageSize(response.metadata.pageSize);
+            if (response.status !== 200) {
+                console.error('API Error:', response.data);
+                return;
+            }
+            setProducts(response.data.items);
+            setTotalPages(response.data.metadata.totalPages);
+            setPageSize(response.data.metadata.pageSize);
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.error('Axios error:', error.message);
