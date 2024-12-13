@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 import Cookies from 'js-cookie';
 import { UserModel } from '../types/UserModel';
 import { AuthenticateResponse } from '../types/AuthenticateResponse';
+import { AxiosData } from '../types/AxiosData';
 
 export default class UserService {
     private api_token: string | undefined;
@@ -34,19 +35,19 @@ export default class UserService {
         return this.client;
     };
 
-    login = (email: string, password: string): Promise<AuthenticateResponse | undefined> => {
+    login = (email: string, password: string): Promise<AxiosData<AuthenticateResponse>> => {
         return this.init().post("/Login", { email, password });
     };
 
-    register = (firstName: string, lastName: string, email: string, password: string): Promise<any> => {
+    register = (firstName: string, lastName: string, email: string, password: string): Promise<AxiosData<any>> => {
         return this.init().post("/Register", { firstName, lastName, email, password });
     };
 
-    get = (userId: number): Promise<UserModel> => {
+    get = (userId: number): Promise<AxiosData<UserModel>> => {
         return this.init().post("", { userId });
     };
 
-    put = (model: UserModel): Promise<any> => {
+    put = (model: UserModel): Promise<AxiosData<any>> => {
         return this.init().put("", { model });
     };
 }
