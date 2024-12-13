@@ -1,31 +1,40 @@
 import React, { useState } from "react";
 import useUserService from "../hooks/useUserService";
 import Cookies from 'js-cookie';
+import InputBox from "./InputBox";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Signin: React.FC = () => {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const userService = new useUserService();
     const { login } = userService;
+    const navigate = useNavigate();
 
     const signin = async (e: React.FormEvent<HTMLFormElement>) => {
         try {
             e.preventDefault();
+            toast.loading("Logging in...");
             const response = await login(email, password);
-            if (response) {
-                Cookies.set('firstName', JSON.stringify(response.firstName), { expires: Date.now() + 3600000 });
-                Cookies.set('lastName', JSON.stringify(response.lastName), { expires: Date.now() + 3600000 });
-                Cookies.set('token', response.token, { expires: Date.now() + 3600000 });
+            if (response.status === 200) {
+                toast.success("Login successful");
 
-                window.location.href = "/";
+                Cookies.set('firstName', JSON.stringify(response.data.firstName), { expires: Date.now() + 3600000 });
+                Cookies.set('lastName', JSON.stringify(response.data.lastName), { expires: Date.now() + 3600000 });
+                Cookies.set('token', response.data.token, { expires: Date.now() + 3600000 });
+
+                navigate("/");
             }
         } catch (error) {
+            toast.error("An error occurred. Please try again.");
             console.error("Unexpected error:", error);
         }
     };
 
     return (
         <section className="bg-gray-1 py-20 dark:bg-dark lg:py-[120px]">
+            <Toaster />
             <div className="container mx-auto">
                 <div className="-mx-4 flex flex-wrap">
                     <div className="w-full px-4">
@@ -78,26 +87,3 @@ const Signin: React.FC = () => {
 };
 
 export default Signin;
-
-interface InputBoxProps {
-    type: string;
-    placeholder: string;
-    name: string;
-    onValueChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    value: string;
-}
-
-const InputBox = ({ type, placeholder, name, onValueChange, value }: InputBoxProps) => {
-    return (
-        <div className="mb-6">
-            <input
-                type={type}
-                placeholder={placeholder}
-                name={name}
-                className="w-full rounded-md border bg-transparent px-5 py-3 text-base text-body-color outline-none focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:text-white"
-                onChange={onValueChange}
-                value={value}
-            />
-        </div>
-    );
-};
