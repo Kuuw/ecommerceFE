@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useUserService from "../hooks/useUserService";
 import InputBox from "./InputBox";
 import toast from "react-hot-toast";
-import { redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Register: React.FC = () => {
     const [firstName, setFirstName] = useState<string>("");
@@ -11,8 +11,7 @@ const Register: React.FC = () => {
     const [password, setPassword] = useState<string>("");
     const userService = new useUserService();
     const { register } = userService;
-    const [redirect, setRedirect] = useState<boolean>(false);
-
+    const navigate = useNavigate();
 
     const registerFunc = async (e: React.FormEvent<HTMLFormElement>) => {
         try {
@@ -22,7 +21,7 @@ const Register: React.FC = () => {
             if (response.status === 200) {
                 toast.success("Registration successful");
 
-                setRedirect(true);
+                navigate("/account/signin");
             }
         } catch (error) {
             console.error("Unexpected error:", error);
@@ -31,7 +30,6 @@ const Register: React.FC = () => {
 
     return (
         <section className="bg-gray-1 py-20 dark:bg-dark lg:py-[120px]">
-            {redirect ? (<Redirect push to="/account/signin" />) : null}
             <div className="container mx-auto">
                 <div className="-mx-4 flex flex-wrap">
                     <div className="w-full px-4">
