@@ -1,45 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import useProductService from '../hooks/useProductService';
-import { Product } from '../types/Product';
-import axios from 'axios';
-import ProductCard from './card/ProductCard';
+import React, { useEffect, useState } from "react";
+import ProductCard from "./card/ProductCard";
+import Filters from "./Filters";
+import useProductService from "../hooks/useProductService";
+import { Product } from "../types/Product";
+import { ProductFilter } from "../types/ProductFilter";
+import axios from "axios";
 
 const Products: React.FC = () => {
     const productService = new useProductService();
-    const filters = {};
     const { getPaged } = productService;
     const [products, setProducts] = useState<Product[]>([]);
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [totalPages, setTotalPages] = useState<number>(1);
-    const [pageSize, setPageSize] = useState<number>(12);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [totalPages, setTotalPages] = useState(1);
+    const [search, setSearch] = useState<string | null>("");
+    const [minPrice, setMinPrice] = useState<number | null>(null);
+    const [maxPrice, setMaxPrice] = useState<number | null>(null);
+    const [category, setCategory] = useState<number | null>(null);
+
+    useEffect(() => {
+        fetchProducts();
+    });
 
     const fetchProducts = async () => {
         try {
-            const response = await getPaged(currentPage, pageSize, filters);
-            console.log('API Response:', response);
-            if (response.status !== 200) {
-                console.error('API Error:', response.data);
-                return;
+            const filter: ProductFilter = { productName: search, categoryId: category, minPrice: minPrice, maxPrice: maxPrice };
+
+            const response = await getPaged(currentPage, pageSize, filter);
+            if (response.status === 200) {
+                setProducts(response.data.items);
+                setTotalPages(response.data.metadata.totalPages);
+            } else {
+                console.error('Response status:', response.status);
             }
-            setProducts(response.data.items);
-            setTotalPages(response.data.metadata.totalPages);
-            setPageSize(response.data.metadata.pageSize);
         } catch (error) {
-            if (axios.isAxiosError(error)) {
-                console.error('Axios error:', error.message);
-                if (error.response) {
-                    console.error('Response data:', error.response.data);
-                    console.error('Response status:', error.response.status);
-                }
+            if (axios.isAxiosError(error) && error.response) {
+                console.error('Response status:', error.response.status);
             } else {
                 console.error('Unexpected error:', error);
             }
         }
     };
-
-    useEffect(() => {
-        fetchProducts();
-    }, [currentPage]);
 
     const handleNextPage = () => {
         if (currentPage < totalPages) {
@@ -55,9 +56,20 @@ const Products: React.FC = () => {
 
     return (
         <div>
+            <Filters
+                search={search}
+                setSearch={setSearch}
+                minPrice={minPrice ?? null}
+                setMinPrice={setMinPrice}
+                maxPrice={maxPrice ?? 0}
+                setMaxPrice={setMaxPrice}
+                category={category}
+                setCategory={setCategory}
+                applyFilter={fetchProducts}
+            />
             <div className="flex flex-wrap">
                 {products.map(product => (
-                    <ProductCard product={product} />
+                    <ProductCard key={product.productId?.toString()} product={product} />
                 ))}
             </div>
             <div className='paging-container'>
