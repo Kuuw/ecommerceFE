@@ -5,10 +5,16 @@ import useProductService from "../hooks/useProductService";
 import { Product } from "../types/Product";
 import { ProductFilter } from "../types/ProductFilter";
 import axios from "axios";
+import useCartService from "../hooks/useCartService";
+import toast, { Toaster } from 'react-hot-toast';
+import Cookies from "js-cookie";
 
 const Products: React.FC = () => {
     const productService = new useProductService();
     const { getPaged } = productService;
+
+    const cartService = new useCartService();
+
     const [products, setProducts] = useState<Product[]>([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
@@ -17,6 +23,8 @@ const Products: React.FC = () => {
     const [minPrice, setMinPrice] = useState<number | null>(null);
     const [maxPrice, setMaxPrice] = useState<number | null>(null);
     const [category, setCategory] = useState<number | null>(null);
+
+    const loggedIn = Cookies.get('token') != null;
 
     useEffect(() => {
         fetchProducts();
@@ -54,8 +62,24 @@ const Products: React.FC = () => {
         }
     };
 
+    const addToCart = (product: Product) => {
+        if (!loggedIn) {
+            toast.error('You must be logged in to add products to cart');
+            return;
+        }
+        if (product.productId != null) {
+            cartService.put({ productId: product.productId, quantity: 1 });
+            toast.success('Product added to cart');
+        } else {
+            console.error('Product ID is null or undefined');
+        }
+
+
+    };
+
     return (
         <div>
+            <Toaster />
             <Filters
                 search={search}
                 setSearch={setSearch}
@@ -69,8 +93,7 @@ const Products: React.FC = () => {
             />
             <div className="flex flex-wrap">
                 {products.map(product => (
-                    <ProductCard key={product.productId?.toString()} product={product} />
-                ))}
+                    <ProductCard key={product.productId?.toString()} product={product} onAddToCart={() => addToCart({ ...product })} />))}
             </div>
             <div className='paging-container'>
                 <button onClick={handlePreviousPage} disabled={currentPage === 1} className='paging-button'>
