@@ -68,7 +68,10 @@ const Products: React.FC = () => {
             return;
         }
         if (product.productId != null) {
-            cartService.put({ productId: product.productId, quantity: 1 });
+            cartService.put({
+                productId: product.productId, quantity: 1,
+                product: undefined
+            });
             toast.success('Product added to cart');
         } else {
             console.error('Product ID is null or undefined');
