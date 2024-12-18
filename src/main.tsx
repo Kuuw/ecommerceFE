@@ -7,12 +7,12 @@ import Navbar from './components/Navbar';
 import HomeView from './views/HomeView';
 import SignInView from './views/account/SignInView';
 import SignUpView from './views/account/SignUpView';
+import CartView from './views/order/CartView';
 /* import ForgotPasswordView from './views/account/ForgotPasswordView';
 import MyProfileView from './views/account/MyProfileView';
 import OrdersView from './views/order/OrdersView';
 import ProductListView from './views/product/ProductListView';
 import ProductDetailView from './views/product/ProductDetailView';
-import CartView from './views/order/CartView';
 import CheckoutView from './views/order/CheckoutView';
 import ContactUsView from './views/ContactUsView';
 import InternalServerErrorView from './views/error/InternalServerErrorView';
@@ -32,6 +32,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/" element={<HomeView />} />
             <Route path="/account/signin" element={<SignInView />} />
             <Route path="/account/signup" element={<SignUpView />} />
+            <Route path="/cart" element={<CartView />} />
             {/*<Route
               path="/account/forgotpassword"
               element={<ForgotPasswordView />}
@@ -40,7 +41,6 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/account/orders" element={<OrdersView />} />
             <Route path="/category" element={<ProductListView />} />
             <Route path="/product/detail" element={<ProductDetailView />} />
-            <Route path="/cart" element={<CartView />} />
             <Route path="/checkout" element={<CheckoutView />} />
             <Route path="/contact-us" element={<ContactUsView />} />
             <Route path="/500" element={<InternalServerErrorView />} />
