@@ -19,7 +19,7 @@ export default class CategoryService {
     }
 
     init = (): AxiosInstance => {
-        this.api_token = Cookies.get('ACCESS_TOKEN');
+        this.api_token = Cookies.get('token');
 
         let headers: Record<string, string> = {
             Accept: "application/json",
