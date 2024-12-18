@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import useUserService from "../hooks/useUserService";
 import InputBox from "./InputBox";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from 'react-router-dom';
 
 const Register: React.FC = () => {
@@ -16,11 +16,14 @@ const Register: React.FC = () => {
     const registerFunc = async (e: React.FormEvent<HTMLFormElement>) => {
         try {
             e.preventDefault();
-            toast.loading("Sigining up...");
-            const response = await register(firstName, lastName, email, password);
+            const promise = register(firstName, lastName, email, password);
+            toast.promise(promise, {
+                loading: 'Registering...',
+                success: 'Registration successful',
+                error: 'Error when registering',
+            });
+            const response = await promise;
             if (response.status === 200) {
-                toast.success("Registration successful");
-
                 navigate("/account/signin");
             }
         } catch (error) {
@@ -30,6 +33,7 @@ const Register: React.FC = () => {
 
     return (
         <section className="bg-gray-1 py-20 dark:bg-dark lg:py-[120px]">
+            <Toaster />
             <div className="container mx-auto">
                 <div className="-mx-4 flex flex-wrap">
                     <div className="w-full px-4">

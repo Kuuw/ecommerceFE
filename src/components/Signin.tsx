@@ -15,11 +15,14 @@ const Signin: React.FC = () => {
     const signin = async (e: React.FormEvent<HTMLFormElement>) => {
         try {
             e.preventDefault();
-            toast.loading("Logging in...");
-            const response = await login(email, password);
+            const promise = login(email, password);
+            toast.promise(promise, {
+                loading: 'Logging in...',
+                success: 'Login successful',
+                error: 'Error when logging in',
+            });
+            const response = await promise;
             if (response.status === 200) {
-                toast.success("Login successful");
-
                 Cookies.set('firstName', JSON.stringify(response.data.firstName), { expires: Date.now() + 3600000 });
                 Cookies.set('lastName', JSON.stringify(response.data.lastName), { expires: Date.now() + 3600000 });
                 Cookies.set('token', response.data.token, { expires: Date.now() + 3600000 });
@@ -27,7 +30,6 @@ const Signin: React.FC = () => {
                 navigate("/");
             }
         } catch (error) {
-            toast.error("An error occurred. Please try again.");
             console.error("Unexpected error:", error);
         }
     };
