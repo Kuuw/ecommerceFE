@@ -28,7 +28,7 @@ const Products: React.FC = () => {
 
     useEffect(() => {
         fetchProducts();
-    });
+    }, [currentPage, search, minPrice, maxPrice, category]);
 
     const fetchProducts = async () => {
         try {
