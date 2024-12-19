@@ -2,19 +2,24 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useCartService from '../hooks/useCartService';
 import userOrderService from '../hooks/useOrderService';
+import useAddressService from '../hooks/useAddressService';
 import Cookies from 'js-cookie';
 import type { Cart } from '../types/Cart';
 import toast, { Toaster } from 'react-hot-toast';
+import { Address } from '../types/Address';
 
 const Cart: React.FC = () => {
     let navigate = useNavigate();
 
     const cartService = new useCartService();
     const orderService = new userOrderService();
+    const addressService = new useAddressService();
 
     const isLoggedIn = Cookies.get('token') != null;
 
     const [cartItems, setCartItems] = useState<Cart>();
+    const [addresses, setAddresses] = useState<Address[]>();
+    const [addressId, setAddressId] = useState<number>();
 
     const fetchProducts = async () => {
         if (!isLoggedIn) {
@@ -28,6 +33,20 @@ const Cart: React.FC = () => {
             return;
         }
         setCartItems(data.data);
+    };
+
+    const fetchAddresses = async () => {
+        if (!isLoggedIn) {
+            navigate('/account/signin');
+            return;
+        }
+        const data = await addressService.get()
+        if (data.status !== 200) {
+            console.error('Response status:', data.status);
+            toast.error('Error when fetching cart items');
+            return;
+        }
+        setAddresses(data.data);
     };
 
     const deleteCartItem = async (productId: number) => {
@@ -62,6 +81,10 @@ const Cart: React.FC = () => {
     };
 
     const checkout = async () => {
+        if (addressId == undefined) {
+            toast.error('Please select an address');
+            return;
+        }
         const items = cartItems?.cart.map(item => {
             if (item.product?.productId == null) {
                 throw new Error('Product ID is missing');
@@ -74,7 +97,7 @@ const Cart: React.FC = () => {
             toast.error('No items in the cart');
             return;
         }
-        const data = await orderService.post({ orderId: null, addressId: 2, shipmentCompanyId: null, shipmentTrack: null, orderItems: items });
+        const data = await orderService.post({ orderId: null, addressId: addressId, shipmentCompanyId: null, shipmentTrack: null, orderItems: items });
         if (data.status !== 200) {
             console.error('Response status:', data.status);
             toast.error('Error when creating order');
@@ -87,6 +110,7 @@ const Cart: React.FC = () => {
     }
 
     useEffect(() => {
+        fetchAddresses();
         fetchProducts();
     }, []);
 
@@ -133,8 +157,15 @@ const Cart: React.FC = () => {
                     <div className='w-full p-2 dark:text-white text-right text-base text-black'>
                         Total: {calculateTotal()}₺
                     </div>
+                    <select onChange={(e) => setAddressId(parseInt(e.target.value))}
+                        className="bg-slate-900 border border-gray-300 text-gray-900 mr-2 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="" disabled selected>Select an address</option>
+                        {addresses?.map((address) => (
+                            <option key={address.addressId} value={address.addressId?.toString()}>{address.firstName} {address.lastName} / {address.postalCode}</option>
+                        ))}
+                    </select>
                     <button onClick={checkout}
-                        className='focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800'>
+                        className='focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800'>
                         Checkout
                     </button>
                 </div>
