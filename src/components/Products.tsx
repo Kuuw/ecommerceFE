@@ -94,16 +94,16 @@ const Products: React.FC = () => {
                 setCategory={setCategory}
                 applyFilter={fetchProducts}
             />
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap justify-center">
                 {products.map(product => (
                     <ProductCard key={product.productId?.toString()} product={product} onAddToCart={() => addToCart({ ...product })} />))}
             </div>
             <div className='paging-container'>
-                <button onClick={handlePreviousPage} disabled={currentPage === 1} className='paging-button'>
+                <button onClick={handlePreviousPage} disabled={currentPage === 1} className='paging-button text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'>
                     Previous
                 </button>
                 <span>Page {currentPage} of {totalPages}</span>
-                <button onClick={handleNextPage} disabled={currentPage === totalPages} className='paging-button'>
+                <button onClick={handleNextPage} disabled={currentPage === totalPages} className='paging-button text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'>
                     Next
                 </button>
             </div>

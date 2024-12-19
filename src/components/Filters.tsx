@@ -27,43 +27,63 @@ const Filters: React.FC<IProductFilter> = (props: IProductFilter) => {
         }
     };
 
+    const resetFilters = () => {
+        props.setSearch && props.setSearch("");
+        props.setCategory && props.setCategory(null);
+        props.setMinPrice && props.setMinPrice(null);
+        props.setMaxPrice && props.setMaxPrice(null);
+    }
+
     return (
         <div>
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap gap-6 mb-6 md:grid-cols-2">
                 {/* Search box */}
-                <input
-                    type="text"
-                    placeholder="Search"
-                    value={props.search ?? ""}
-                    onChange={(e) => props.setSearch && props.setSearch(e.target.value)}
-                />
+                <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Search</label>
+                    <input
+                        type="text"
+                        placeholder=""
+                        value={props.search ?? ""}
+                        onChange={(e) => props.setSearch && props.setSearch(e.target.value)}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
+                </div>
                 {/* Price range */}
-                <input
-                    type="number"
-                    placeholder="Min price"
-                    value={props.minPrice ?? ""}
-                    onChange={(e) => props.setMinPrice && props.setMinPrice(Number(e.target.value))}
-                />
-                <input
-                    type="number"
-                    placeholder="Max price"
-                    value={props.maxPrice ?? ""}
-                    onChange={(e) => props.setMaxPrice && props.setMaxPrice(Number(e.target.value))}
-                />
+                <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Minimum Price</label>
+                    <input
+                        type="number"
+                        placeholder=""
+                        value={props.minPrice ?? ""}
+                        onChange={(e) => props.setMinPrice && props.setMinPrice(Number(e.target.value))}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
+                </div>
+                <div>
+                    <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Maximum Price</label>
+                    <input
+                        type="number"
+                        placeholder="Max price"
+                        value={props.maxPrice ?? ""}
+                        onChange={(e) => props.setMaxPrice && props.setMaxPrice(Number(e.target.value))}
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    />
+                </div>
                 {/* Category filter */}
-                {categories.map((category) => (
-                    <div key={category.categoryId?.toString()}>
-                        <input
-                            type="radio"
-                            name="category"
-                            value={category.categoryId?.toString()}
-                            onChange={(e) => props.setCategory && props.setCategory(Number(e.target.value))}
-                        />
-                        <label htmlFor="category">{category.name}</label>
-                    </div>
-                ))}
+                <div id="dropdown" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                    <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                        {categories.map((category) => (
+                            <li key={category.categoryId?.toString()}>
+                                <a href="#" onClick={() => props.setCategory && props.setCategory(category.categoryId!)} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{category.name}</a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
                 {/* Apply button */}
-                <button onClick={() => props.applyFilter}>Apply</button>
+                <div className="content-end">
+                    <button className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={() => props.applyFilter()}>Apply</button>
+                    <button className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700" onClick={() => resetFilters()}>Clear</button>
+                </div>
             </div>
         </div>
     );
