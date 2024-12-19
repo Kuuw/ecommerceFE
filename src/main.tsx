@@ -9,6 +9,9 @@ import SignInView from './views/account/SignInView';
 import SignUpView from './views/account/SignUpView';
 import CartView from './views/order/CartView';
 import { FooterComponent } from './components/Footer';
+import AddressView from './views/account/AddressView';
+import AddAddressView from './views/account/AddAddressView';
+import EditAddressView from './views/account/EditAddressView';
 /* import ForgotPasswordView from './views/account/ForgotPasswordView';
 import MyProfileView from './views/account/MyProfileView';
 import OrdersView from './views/order/OrdersView';
@@ -33,6 +36,9 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/" element={<HomeView />} />
             <Route path="/account/signin" element={<SignInView />} />
             <Route path="/account/signup" element={<SignUpView />} />
+            <Route path="/account/addresses" element={<AddressView />} />
+            <Route path="/account/addresses/add" element={<AddAddressView />} />
+            <Route path="/account/addresses/edit/:addressId" element={<EditAddressView />} />
             <Route path="/cart" element={<CartView />} />
             {/*<Route
               path="/account/forgotpassword"

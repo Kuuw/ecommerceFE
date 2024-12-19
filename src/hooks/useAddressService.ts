@@ -3,10 +3,6 @@ import Cookies from 'js-cookie';
 import { Address } from '../types/Address';
 import { AxiosData } from '../types/AxiosData';
 
-export interface Addresses {
-    results: Address[];
-}
-
 export default class AddressService {
     private api_token: string | undefined;
     private client: AxiosInstance | null;
@@ -38,9 +34,13 @@ export default class AddressService {
         return this.client;
     };
 
-    get = (): Promise<AxiosData<Addresses>> => {
+    get = (): Promise<AxiosData<Address[]>> => {
         return this.init().get(``, {});
     };
+
+    getById = (addressId: number): Promise<AxiosData<Address>> => {
+        return this.init().get(`/${addressId}`, {});
+    }
 
     post = (model: Address): Promise<AxiosData<any>> => {
         return this.init().post(``, model);
