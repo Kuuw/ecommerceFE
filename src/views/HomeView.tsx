@@ -3,8 +3,10 @@ import Products from '../components/Products';
 
 const HomeView: React.FC = () => {
     return (
-        <div>
-            <Products />
+        <div className='bg-slate-950'>
+            <div className='m-5'>
+                <Products />
+            </div>
         </div>
     );
 };
