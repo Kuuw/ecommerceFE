@@ -8,6 +8,7 @@ import HomeView from './views/HomeView';
 import SignInView from './views/account/SignInView';
 import SignUpView from './views/account/SignUpView';
 import CartView from './views/order/CartView';
+import { FooterComponent } from './components/Footer';
 /* import ForgotPasswordView from './views/account/ForgotPasswordView';
 import MyProfileView from './views/account/MyProfileView';
 import OrdersView from './views/order/OrdersView';
@@ -47,6 +48,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="*" element={<NotFoundView />} /> */}
 
           </Routes>
+          <FooterComponent />
         </Suspense>
       </React.Fragment>
     </BrowserRouter>
