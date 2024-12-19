@@ -3,10 +3,6 @@ import Cookies from 'js-cookie';
 import { Country } from '../types/Country';
 import { AxiosData } from '../types/AxiosData';
 
-export interface Countries {
-    results: Country[];
-}
-
 export default class CountryService {
     private api_token: string | undefined;
     private client: AxiosInstance | null;
@@ -38,7 +34,7 @@ export default class CountryService {
         return this.client;
     };
 
-    get = (): Promise<AxiosData<Countries>> => {
+    get = (): Promise<AxiosData<Country[]>> => {
         return this.init().get(``, {});
     };
 
