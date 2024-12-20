@@ -40,7 +40,7 @@ export default class ProductService {
         return this.init().post(`/GetPaged?page=${page}&pageSize=${pageSize}`, productFilter);
     };
 
-    getById = (productId: number): Promise<Product> => {
+    getById = (productId: number): Promise<AxiosData<Product>> => {
         return this.init().get(`/${productId}`, {});
     };
 
