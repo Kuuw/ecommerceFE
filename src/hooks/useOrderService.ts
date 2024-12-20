@@ -3,10 +3,6 @@ import Cookies from 'js-cookie';
 import { Order } from '../types/Order';
 import { AxiosData } from '../types/AxiosData';
 
-export interface Orders {
-    results: Order[];
-}
-
 export default class OrderService {
     private api_token: string | undefined;
     private client: AxiosInstance | null;
@@ -38,7 +34,7 @@ export default class OrderService {
         return this.client;
     };
 
-    get = (): Promise<AxiosData<Orders>> => {
+    get = (): Promise<AxiosData<Order[]>> => {
         return this.init().get(``, {});
     };
 

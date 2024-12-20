@@ -70,14 +70,18 @@ const Filters: React.FC<IProductFilter> = (props: IProductFilter) => {
                     />
                 </div>
                 {/* Category filter */}
-                <div id="dropdown" className="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                    <ul className="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdown-button">
+                <div className="mt-6">
+                    <select
+                        id="dropdown"
+                        className="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 text-sm text-gray-700 dark:text-gray-200"
+                        onChange={(e) => props.setCategory && props.setCategory(Number(e.target.value))}>
+                        <option value={undefined}>All Categories</option>
                         {categories.map((category) => (
-                            <li key={category.categoryId?.toString()}>
-                                <a href="#" onClick={() => props.setCategory && props.setCategory(category.categoryId!)} className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">{category.name}</a>
-                            </li>
+                            <option key={category.categoryId?.toString()} value={category.categoryId?.toString()}>
+                                {category.name}
+                            </option>
                         ))}
-                    </ul>
+                    </select>
                 </div>
                 {/* Apply button */}
                 <div className="content-end">
