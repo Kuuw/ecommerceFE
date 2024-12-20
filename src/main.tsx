@@ -13,12 +13,9 @@ import AddressView from './views/account/AddressView';
 import AddAddressView from './views/account/AddAddressView';
 import EditAddressView from './views/account/EditAddressView';
 import OrdersView from './views/order/OrdersView';
+import ProductDetailView from './views/product/ProductDetailView';
 /* import ForgotPasswordView from './views/account/ForgotPasswordView';
 import MyProfileView from './views/account/MyProfileView';
-import OrdersView from './views/order/OrdersView';
-import ProductListView from './views/product/ProductListView';
-import ProductDetailView from './views/product/ProductDetailView';
-import CheckoutView from './views/order/CheckoutView';
 import ContactUsView from './views/ContactUsView';
 import InternalServerErrorView from './views/error/InternalServerErrorView';
 import NotFoundView from './views/error/NotFoundView'; */
@@ -42,15 +39,12 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/account/addresses/edit/:addressId" element={<EditAddressView />} />
             <Route path="/cart" element={<CartView />} />
             <Route path="/orders" element={<OrdersView />} />
+            <Route path="/products/detail/:productId" element={<ProductDetailView />} />
             {/*<Route
               path="/account/forgotpassword"
               element={<ForgotPasswordView />}
             />
             <Route path="/account/profile" element={<MyProfileView />} />
-            <Route path="/account/orders" element={<OrdersView />} />
-            <Route path="/category" element={<ProductListView />} />
-            <Route path="/product/detail" element={<ProductDetailView />} />
-            <Route path="/checkout" element={<CheckoutView />} />
             <Route path="/contact-us" element={<ContactUsView />} />
             <Route path="/500" element={<InternalServerErrorView />} />
             <Route path="*" element={<NotFoundView />} /> */}
