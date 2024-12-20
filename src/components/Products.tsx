@@ -28,7 +28,7 @@ const Products: React.FC = () => {
 
     useEffect(() => {
         fetchProducts();
-    }, [currentPage, search, minPrice, maxPrice, category]);
+    }, [currentPage, pageSize, search, minPrice, maxPrice, category]);
 
     const fetchProducts = async () => {
         try {
@@ -76,8 +76,11 @@ const Products: React.FC = () => {
         } else {
             console.error('Product ID is null or undefined');
         }
+    };
 
-
+    const handlePageSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setPageSize(parseInt(e.currentTarget.value));
+        setCurrentPage(1);
     };
 
     return (
@@ -106,6 +109,15 @@ const Products: React.FC = () => {
                 <button onClick={handleNextPage} disabled={currentPage === totalPages} className='paging-button text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'>
                     Next
                 </button>
+            </div>
+            <div className="flex justify-center mt-4">
+                <span className="mr-2 font-medium text-lg">Page Size:</span>
+                <select className="form-select block" onChange={handlePageSizeChange} value={pageSize}>
+                    <option value="5">5</option>
+                    <option value="10" selected>10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
             </div>
         </div>
     );
