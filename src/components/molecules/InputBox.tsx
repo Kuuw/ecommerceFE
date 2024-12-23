@@ -1,3 +1,5 @@
+import Input from "../atoms/Input";
+
 interface InputBoxProps {
     type: string;
     placeholder: string;
@@ -9,7 +11,7 @@ interface InputBoxProps {
 const InputBox = ({ type, placeholder, name, onValueChange, value }: InputBoxProps) => {
     return (
         <div className="mb-6">
-            <input
+            <Input
                 type={type}
                 placeholder={placeholder}
                 name={name}

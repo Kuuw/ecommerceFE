@@ -1,5 +1,5 @@
 import React from 'react';
-import EditAddress from '../../components/Address/EditAddress';
+import EditAddress from '../../components/pages/Address/EditAddress';
 import { useParams } from 'react-router-dom';
 
 const EditAddressView: React.FC = () => {

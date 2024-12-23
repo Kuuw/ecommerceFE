@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAddressService from '../../hooks/useAddressService';
-import useCountryService from '../../hooks/useCountryService';
+import useAddressService from '../../../services/AddressService';
+import useCountryService from '../../../services/CountryService';
 import Cookies from 'js-cookie';
-import toast, { Toaster } from 'react-hot-toast';
-import { Country } from '../../types/Country';
+import toast from 'react-hot-toast';
+import { Country } from '../../../types/Country';
+import AddressForm from '../../organisms/AddressForm';
 
 type AddAddressProps = {
     addressId: number;
@@ -96,40 +97,25 @@ const AddAddress: React.FC<AddAddressProps> = ({ addressId }) => {
 
     return (
         <div className="m-10">
-            <Toaster />
-            <h1 className="text-2xl font-bold">Add Address</h1>
-
-            <form onSubmit={(e) => {
-                e.preventDefault();
-                editAddress();
-            }}>
-                <div className="mt-3 mr-3 p-5 border border-slate-800 bg-slate-900 rounded-lg flex flex-col">
-                    <div className='flex-row'>
-                        <input type="text" placeholder="Name" className="p-2 rounded-lg mt-2 mr-2" onChange={(e) => setName(e.target.value)} value={name} />
-                        <input type="text" placeholder="Surname" className="p-2 rounded-lg mt-2 mr-2" onChange={(e) => setSurname(e.target.value)} value={surname} />
-                    </div>
-                    <div className='flex-row'>
-                        <textarea placeholder="Address Line 1" className="p-2 rounded-lg mt-2 mr-2 min-w-full min-h-10 max-h-24" onChange={(e) => setAddressLine1(e.target.value)} value={addressLine1} />
-                    </div>
-                    <div className='flex-row'>
-                        <textarea placeholder="Address Line 2" className="p-2 rounded-lg mt-2 mr-2 min-w-full min-h-10 max-h-24" onChange={(e) => setAddressLine2(e.target.value)} value={addressLine2 ?? ''} />
-                    </div>
-                    <div className='flex-row'>
-                        <input type="text" placeholder="Postal Code" className="p-2 rounded-lg mt-2 mr-2" onChange={(e) => setPostalCode(e.target.value)} value={postalCode} />
-                        <input type="text" placeholder="Phone Number" className="p-2 rounded-lg mt-2 mr-2" onChange={(e) => setPhoneNumber(e.target.value)} value={phoneNumber} />
-                    </div>
-                    <div className='flex-row'>
-                        <select id="countries" onChange={(e) => setCountryId(parseInt(e.target.value))}
-                            className="bg-slate-900 border border-gray-300 text-gray-900 mt-2 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            <option value="" disabled>Select a country</option>
-                            {countries?.map((country) => (
-                                <option key={country.countryId} value={country.countryId?.toString()} selected={country.countryId === countryId}>{country.countryName}</option>
-                            ))}
-                        </select>
-                    </div>
-                    <button type="submit" className="bg-blue-500 text-white p-2 rounded-lg mt-2">Edit Address</button>
-                </div>
-            </form >
+            <AddressForm
+                formName="Edit Address"
+                countries={countries || []}
+                editAddress={editAddress}
+                name={name || ''}
+                setName={setName}
+                surname={surname || ''}
+                setSurname={setSurname}
+                addressLine1={addressLine1 || ''}
+                setAddressLine1={setAddressLine1}
+                addressLine2={addressLine2 || ''}
+                setAddressLine2={setAddressLine2}
+                postalCode={postalCode || ''}
+                setPostalCode={setPostalCode}
+                phoneNumber={phoneNumber || ''}
+                setPhoneNumber={setPhoneNumber}
+                countryId={countryId || 0}
+                setCountryId={setCountryId}
+            />
         </div >
     );
 };

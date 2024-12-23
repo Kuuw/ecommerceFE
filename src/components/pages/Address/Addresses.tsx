@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAddressService from '../../hooks/useAddressService';
+import useAddressService from '../../../services/AddressService';
 import Cookies from 'js-cookie';
 import toast, { Toaster } from 'react-hot-toast';
-import { Address } from '../../types/Address';
+import { Address } from '../../../types/Address';
+import ButtonStyles from '../../../styles/ButtonStyles';
+import Button from '../../atoms/Button';
 
 const Addresses: React.FC = () => {
     let navigate = useNavigate();
@@ -46,7 +48,7 @@ const Addresses: React.FC = () => {
         <div className="m-10">
             <Toaster />
             <h1 className="text-2xl font-bold">Addresses</h1>
-            <button onClick={() => navigate('/account/addresses/add')} className="bg-blue-500 text-white p-2 rounded-lg mt-2">Add Address</button>
+            <Button onClick={() => navigate('/account/addresses/add')} style={ButtonStyles.BLUE}>Add Address</Button>
             <div className="flex flex-wrap">
                 {addresses?.map((address) => (
                     <div key={address.addressId} className="mt-3 mr-3 p-5 border border-slate-800 bg-slate-900 rounded-lg">
@@ -55,8 +57,10 @@ const Addresses: React.FC = () => {
                         <p><span className='text-blue-300 font-bold'>Adres Satırı 2:</span> {address.addressLine2}</p>
                         <p><span className='text-blue-300 font-bold'>Posta Kodu:</span> {address.postalCode}</p>
                         <p><span className='text-blue-300 font-bold'>Telefon:</span> {address.telephone}</p>
-                        <button onClick={() => navigate(`/account/addresses/edit/${address.addressId}`)} className="bg-blue-500 text-white p-2 rounded-lg mt-2 mr-2">Edit</button>
-                        <button onClick={() => deleteAddress(address.addressId!)} className="bg-red-500 text-white p-2 rounded-lg mt-2">Delete</button>
+                        <div className='mt-2'>
+                            <Button onClick={() => navigate(`/account/addresses/edit/${address.addressId}`)} style={ButtonStyles.BLUE} className='mr-2'>Edit</Button>
+                            <Button onClick={() => deleteAddress(address.addressId!)} style={ButtonStyles.RED}>Delete</Button>
+                        </div>
                     </div>
                 ))}
             </div>

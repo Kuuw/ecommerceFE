@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductDetail from '../../components/ProductDetail';
+import ProductDetail from '../../components/pages/ProductDetail';
 import { useParams } from 'react-router-dom';
 
 const ProductDetailView: React.FC = () => {

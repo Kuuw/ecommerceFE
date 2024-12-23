@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Order } from '../types/Order';
-import useOrderService from '../hooks/useOrderService';
-import toast, { Toaster } from 'react-hot-toast';
+import { Order } from '../../types/Order';
+import useOrderService from '../../services/OrderService';
+import toast from 'react-hot-toast';
 import Cookies from 'js-cookie';
 import { redirect } from 'react-router-dom';
+import Button from '../atoms/Button';
+import ButtonStyles from '../../styles/ButtonStyles';
 
 const Orders: React.FC = () => {
     const orderService = new useOrderService();
@@ -42,7 +44,6 @@ const Orders: React.FC = () => {
 
     return (
         <div className='m-5'>
-            <Toaster />
             <div className='flex flex-wrap'>
                 {orders.map((order) => (
                     <div key={order.orderId} className="bg-slate-900 dark:bg-dark-2 rounded-lg p-4 mb-4 mr-4 max-w-[500px] flex-shrink-0">
@@ -52,7 +53,7 @@ const Orders: React.FC = () => {
                                 <p className="text-sm">Total Price: {calculateTotalPrice(order)}₺</p>
                             </div>
                             <div>
-                                <button className="bg-blue-500 text-white rounded-lg p-2">Details</button>
+                                <Button style={ButtonStyles.BLUE} className='ml-2'>Details</Button>
                             </div>
                         </div>
                     </div>

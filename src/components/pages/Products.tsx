@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import ProductCard from "./card/ProductCard";
-import Filters from "./Filters";
-import useProductService from "../hooks/useProductService";
-import { Product } from "../types/Product";
-import { ProductFilter } from "../types/ProductFilter";
+import ProductCard from "../molecules/ProductCard";
+import Filters from "../organisms/Filters";
+import useProductService from "../../services/ProductService";
+import { Product } from "../../types/Product";
+import { ProductFilter } from "../../types/ProductFilter";
 import axios from "axios";
-import useCartService from "../hooks/useCartService";
-import toast, { Toaster } from 'react-hot-toast';
+import useCartService from "../../services/CartService";
+import toast from 'react-hot-toast';
 import Cookies from "js-cookie";
+import PagingController from "../molecules/PagingController";
+import SelectField from "../molecules/SelectField";
 
 const Products: React.FC = () => {
     const productService = new useProductService();
@@ -85,7 +87,6 @@ const Products: React.FC = () => {
 
     return (
         <div>
-            <Toaster />
             <Filters
                 search={search}
                 setSearch={setSearch}
@@ -101,24 +102,18 @@ const Products: React.FC = () => {
                 {products.map(product => (
                     <ProductCard key={product.productId?.toString()} product={product} onAddToCart={() => addToCart({ ...product })} />))}
             </div>
-            <div className='paging-container'>
-                <button onClick={handlePreviousPage} disabled={currentPage === 1} className='paging-button text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'>
-                    Previous
-                </button>
-                <span>Page {currentPage} of {totalPages}</span>
-                <button onClick={handleNextPage} disabled={currentPage === totalPages} className='paging-button text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'>
-                    Next
-                </button>
-            </div>
-            <div className="flex justify-center mt-4">
-                <span className="mr-2 font-medium text-lg">Page Size:</span>
-                <select className="form-select block" onChange={handlePageSizeChange} value={pageSize}>
-                    <option value="5">5</option>
-                    <option value="10" selected>10</option>
-                    <option value="15">15</option>
-                    <option value="20">20</option>
-                </select>
-            </div>
+            <PagingController currentPage={currentPage} totalPages={totalPages} handlePreviousPage={handlePreviousPage} handleNextPage={handleNextPage} />
+            <SelectField
+                label="Page Size:"
+                value={pageSize.toString()}
+                onChange={handlePageSizeChange}
+                options={[
+                    { value: '5', label: '5' },
+                    { value: '10', label: '10' },
+                    { value: '15', label: '15' },
+                    { value: '20', label: '20' }
+                ]}
+            />
         </div>
     );
 };

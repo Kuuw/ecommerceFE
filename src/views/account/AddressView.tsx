@@ -1,5 +1,5 @@
 import React from 'react';
-import Addresses from '../../components/Address/Addresses';
+import Addresses from '../../components/pages/Address/Addresses';
 
 const AddressView: React.FC = () => {
     return (

@@ -3,17 +3,18 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React from 'react';
-import Navbar from './components/Navbar';
+import Navbar from './components/organisms/Navbar';
 import HomeView from './views/HomeView';
 import SignInView from './views/account/SignInView';
 import SignUpView from './views/account/SignUpView';
 import CartView from './views/order/CartView';
-import { FooterComponent } from './components/Footer';
+import { FooterComponent } from './components/organisms/Footer';
 import AddressView from './views/account/AddressView';
 import AddAddressView from './views/account/AddAddressView';
 import EditAddressView from './views/account/EditAddressView';
 import OrdersView from './views/order/OrdersView';
 import ProductDetailView from './views/product/ProductDetailView';
+import { Toaster } from 'react-hot-toast';
 /* import ForgotPasswordView from './views/account/ForgotPasswordView';
 import MyProfileView from './views/account/MyProfileView';
 import ContactUsView from './views/ContactUsView';
@@ -25,6 +26,7 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <React.Fragment>
         <Navbar />
+        <Toaster />
         <Suspense
           fallback={
             <div className="text-white text-center mt-3">Loading...</div>

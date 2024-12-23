@@ -1,10 +1,10 @@
 import React from 'react';
-import Register from '../../components/Register';
+import SignUp from '../../components/pages/SignUp';
 
 const SignUpView: React.FC = () => {
     return (
         <div>
-            <Register />
+            <SignUp />
         </div>
     );
 };
