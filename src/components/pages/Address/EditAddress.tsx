@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useAddressService from '../../../services/AddressService';
 import useCountryService from '../../../services/CountryService';
 import Cookies from 'js-cookie';
@@ -7,11 +7,7 @@ import toast from 'react-hot-toast';
 import { Country } from '../../../types/Country';
 import AddressForm from '../../organisms/AddressForm';
 
-type AddAddressProps = {
-    addressId: number;
-};
-
-const AddAddress: React.FC<AddAddressProps> = ({ addressId }) => {
+const AddAddress: React.FC = () => {
     let navigate = useNavigate();
 
     const addressService = new useAddressService();
@@ -29,12 +25,14 @@ const AddAddress: React.FC<AddAddressProps> = ({ addressId }) => {
 
     const [countries, setCountries] = useState<Country[]>();
 
+    const { addressId } = useParams();
+
     const getAddress = async () => {
         if (!isLoggedIn) {
             navigate('/account/signin');
             return;
         }
-        const data = await addressService.getById(addressId);
+        const data = await addressService.getById(Number(addressId));
         if (data.status !== 200) {
             console.error('Response status:', data.status);
             toast.error('Error when fetching address');
@@ -57,9 +55,9 @@ const AddAddress: React.FC<AddAddressProps> = ({ addressId }) => {
             return;
         }
         const promise = addressService.put(
-            addressId,
+            Number(addressId),
             {
-                addressId: addressId,
+                addressId: Number(addressId),
                 firstName: name!,
                 lastName: surname!,
                 addressLine1: addressLine1!,

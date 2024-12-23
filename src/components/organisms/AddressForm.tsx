@@ -55,7 +55,7 @@ const AddressForm: React.FC<AddressFormProps> = ({
                     editAddress();
                 }}
             >
-                <div className="mt-3 mr-3 p-5 border border-slate-800 bg-slate-900 rounded-lg flex flex-col">
+                <div className="mt-3 mr-3 p-5 border border-slate-800 bg-slate-900 rounded-lg flex flex-col overflow-hidden">
                     <div className="flex-row">
                         <FormField
                             type="text"

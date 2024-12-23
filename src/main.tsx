@@ -4,22 +4,17 @@ import './index.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React from 'react';
 import Navbar from './components/organisms/Navbar';
-import HomeView from './views/HomeView';
-import SignInView from './views/account/SignInView';
-import SignUpView from './views/account/SignUpView';
-import CartView from './views/order/CartView';
 import { FooterComponent } from './components/organisms/Footer';
-import AddressView from './views/account/AddressView';
-import AddAddressView from './views/account/AddAddressView';
-import EditAddressView from './views/account/EditAddressView';
-import OrdersView from './views/order/OrdersView';
-import ProductDetailView from './views/product/ProductDetailView';
 import { Toaster } from 'react-hot-toast';
-/* import ForgotPasswordView from './views/account/ForgotPasswordView';
-import MyProfileView from './views/account/MyProfileView';
-import ContactUsView from './views/ContactUsView';
-import InternalServerErrorView from './views/error/InternalServerErrorView';
-import NotFoundView from './views/error/NotFoundView'; */
+import SignIn from './components/pages/SignIn';
+import AddAddress from './components/pages/Address/AddAddress';
+import Addresses from './components/pages/Address/Addresses';
+import EditAddress from './components/pages/Address/EditAddress';
+import Cart from './components/pages/Cart';
+import Orders from './components/pages/Orders';
+import ProductDetail from './components/pages/ProductDetail';
+import SignUp from './components/pages/SignUp';
+import Home from './components/pages/Home';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -33,24 +28,15 @@ createRoot(document.getElementById('root')!).render(
           }
         >
           <Routes>
-            <Route path="/" element={<HomeView />} />
-            <Route path="/account/signin" element={<SignInView />} />
-            <Route path="/account/signup" element={<SignUpView />} />
-            <Route path="/account/addresses" element={<AddressView />} />
-            <Route path="/account/addresses/add" element={<AddAddressView />} />
-            <Route path="/account/addresses/edit/:addressId" element={<EditAddressView />} />
-            <Route path="/cart" element={<CartView />} />
-            <Route path="/orders" element={<OrdersView />} />
-            <Route path="/products/detail/:productId" element={<ProductDetailView />} />
-            {/*<Route
-              path="/account/forgotpassword"
-              element={<ForgotPasswordView />}
-            />
-            <Route path="/account/profile" element={<MyProfileView />} />
-            <Route path="/contact-us" element={<ContactUsView />} />
-            <Route path="/500" element={<InternalServerErrorView />} />
-            <Route path="*" element={<NotFoundView />} /> */}
-
+            <Route path="/" element={<Home />} />
+            <Route path="/account/signin" element={<SignIn />} />
+            <Route path="/account/signup" element={<SignUp />} />
+            <Route path="/account/addresses" element={<Addresses />} />
+            <Route path="/account/addresses/add" element={<AddAddress />} />
+            <Route path="/account/addresses/edit/:addressId" element={<EditAddress />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/orders" element={<Orders />} />
+            <Route path="/products/detail/:productId" element={<ProductDetail />} />
           </Routes>
           <FooterComponent />
         </Suspense>

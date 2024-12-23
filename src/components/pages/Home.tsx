@@ -11,7 +11,7 @@ import Cookies from "js-cookie";
 import PagingController from "../molecules/PagingController";
 import SelectField from "../molecules/SelectField";
 
-const Products: React.FC = () => {
+const Home: React.FC = () => {
     const productService = new useProductService();
     const { getPaged } = productService;
 
@@ -86,7 +86,7 @@ const Products: React.FC = () => {
     };
 
     return (
-        <div>
+        <div className="px-10 mt-2 bg-slate-950">
             <Filters
                 search={search}
                 setSearch={setSearch}
@@ -118,4 +118,4 @@ const Products: React.FC = () => {
     );
 };
 
-export default Products;
+export default Home;

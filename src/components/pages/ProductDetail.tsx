@@ -6,15 +6,13 @@ import toast from 'react-hot-toast';
 import Button from '../atoms/Button';
 import ButtonStyles from '../../styles/ButtonStyles';
 import ProductImageElement from '../atoms/ProductImageElement';
+import { useParams } from 'react-router-dom';
 
-type ProductDetailParams = {
-    productId: string;
-};
-
-const ProductDetail: React.FC<ProductDetailParams> = ({ productId }) => {
+const ProductDetail: React.FC = () => {
     const productService = new useProductService();
     const cartService = new useCartService();
     const [product, setProduct] = useState<Product | null>(null);
+    const { productId } = useParams();
 
     const fetchProduct = async () => {
         if (productId) {
