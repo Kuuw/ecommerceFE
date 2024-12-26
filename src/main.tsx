@@ -34,6 +34,7 @@ import AdminShipmentCompanyEdit from './components/pages/Admin/AdminShipmentComp
 import AdminProductImage from './components/pages/Admin/Product/AdminProductImage';
 import AdminProductStock from './components/pages/Admin/Product/AdminProductStock';
 import OrderDetail from './components/pages/OrderDetail';
+import Profile from './components/pages/Profile';
 
 const token = Cookies.get('token');
 const isAdmin = token ? jwtDecode<JwtPayloadExtend>(token)['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'Admin' : false;
@@ -51,6 +52,7 @@ createRoot(document.getElementById('root')!).render(
         >
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/account/signin" element={<SignIn />} />
             <Route path="/account/signup" element={<SignUp />} />
             <Route path="/account/addresses" element={<Addresses />} />

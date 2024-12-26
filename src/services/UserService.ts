@@ -43,8 +43,8 @@ export default class UserService {
         return this.init().post("/Register", { firstName, lastName, email, password });
     };
 
-    get = (userId: number): Promise<AxiosData<UserModel>> => {
-        return this.init().post("", { userId });
+    get = (): Promise<AxiosData<UserModel>> => {
+        return this.init().get("", {});
     };
 
     put = (model: UserModel): Promise<AxiosData<any>> => {
