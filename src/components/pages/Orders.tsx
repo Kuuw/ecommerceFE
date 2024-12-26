@@ -3,7 +3,7 @@ import { Order } from '../../types/Order';
 import useOrderService from '../../services/OrderService';
 import toast from 'react-hot-toast';
 import Cookies from 'js-cookie';
-import { redirect } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import Button from '../atoms/Button';
 import ButtonStyles from '../../styles/ButtonStyles';
 
@@ -13,6 +13,8 @@ const Orders: React.FC = () => {
     const [orders, setOrders] = useState<Order[]>([]);
 
     const loggedIn = Cookies.get('token') != null;
+
+    const navigate = useNavigate();
 
     const fetchOrders = async () => {
         if (!loggedIn) {
@@ -53,7 +55,7 @@ const Orders: React.FC = () => {
                                 <p className="text-sm">Total Price: {calculateTotalPrice(order)}₺</p>
                             </div>
                             <div>
-                                <Button style={ButtonStyles.BLUE} className='ml-2'>Details</Button>
+                                <Button style={ButtonStyles.BLUE} className='ml-2' onClick={() => navigate(`/orders/detail/${order.orderId}`)}>Details</Button>
                             </div>
                         </div>
                     </div>
