@@ -57,7 +57,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/account/addresses/add" element={<AddAddress />} />
             <Route path="/account/addresses/edit/:addressId" element={<EditAddress />} />
             <Route path="/cart" element={<Cart />} />
-            <Route path='/products/:productId' element={<ProductDetail />} />
+            <Route path='/products/detail/:productId' element={<ProductDetail />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/orders/detail/:orderId" element={<OrderDetail />} />
             {isAdmin &&
