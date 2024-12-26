@@ -3,9 +3,6 @@ import Cookies from 'js-cookie';
 import { Category } from '../types/Category';
 import { AxiosData } from '../types/AxiosData';
 
-export interface Categories {
-    results: Category[];
-}
 
 export default class CategoryService {
     private api_token: string | undefined;
@@ -38,7 +35,7 @@ export default class CategoryService {
         return this.client;
     };
 
-    get = (): Promise<AxiosData<Categories>> => {
+    get = (): Promise<AxiosData<Category[]>> => {
         return this.init().get(``, {});
     };
 

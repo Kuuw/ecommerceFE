@@ -1,10 +1,10 @@
 import React from 'react';
 
-interface CartTableHeadProps {
+interface TableHeadProps {
     columns: string[];
 }
 
-const CartTableHead: React.FC<CartTableHeadProps> = ({ columns }) => {
+const TableHead: React.FC<TableHeadProps> = ({ columns }) => {
     return (
         <thead>
             <tr>
@@ -16,4 +16,4 @@ const CartTableHead: React.FC<CartTableHeadProps> = ({ columns }) => {
     );
 };
 
-export default CartTableHead;
+export default TableHead;

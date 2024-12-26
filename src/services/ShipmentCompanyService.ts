@@ -3,10 +3,6 @@ import Cookies from 'js-cookie';
 import { ShipmentCompany } from '../types/ShipmentCompany';
 import { AxiosData } from '../types/AxiosData';
 
-export interface ShipmentCompanies {
-    results: ShipmentCompany[];
-}
-
 export default class ShipmentCompanyService {
     private api_token: string | undefined;
     private client: AxiosInstance | null;
@@ -38,7 +34,7 @@ export default class ShipmentCompanyService {
         return this.client;
     };
 
-    get = (): Promise<AxiosData<ShipmentCompanies>> => {
+    get = (): Promise<AxiosData<ShipmentCompany[]>> => {
         return this.init().get(``, {});
     };
 
@@ -47,7 +43,7 @@ export default class ShipmentCompanyService {
     };
 
     post = (model: ShipmentCompany): Promise<AxiosData<any>> => {
-        return this.init().post(``, { model });
+        return this.init().post(``, { ...model });
     };
 
     delete = (shipmentCompanyId: number): Promise<AxiosData<any>> => {
@@ -55,6 +51,6 @@ export default class ShipmentCompanyService {
     };
 
     put = (shipmentCompanyId: number, model: ShipmentCompany): Promise<AxiosData<any>> => {
-        return this.init().put(`/${shipmentCompanyId}`, { model });
+        return this.init().put(`/${shipmentCompanyId}`, { ...model });
     };
 }

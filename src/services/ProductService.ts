@@ -45,7 +45,7 @@ export default class ProductService {
     };
 
     post = (model: Product): Promise<AxiosData<any>> => {
-        return this.init().post(``, { model });
+        return this.init().post(``, { ...model });
     };
 
     delete = (productId: number): Promise<AxiosData<any>> => {
@@ -53,11 +53,11 @@ export default class ProductService {
     };
 
     put = (productId: number, model: Product): Promise<AxiosData<any>> => {
-        return this.init().put(`/${productId}`, { model });
+        return this.init().put(`/${productId}`, { ...model });
     };
 
     updateStock = (productId: number, stock: number): Promise<AxiosData<any>> => {
-        return this.init().put(`/${productId}`, { stock });
+        return this.init().put(`/Stock/${productId}?stock=${stock}`, {});
     };
 
     addImage = (productId: number, file: File): Promise<AxiosData<any>> => {

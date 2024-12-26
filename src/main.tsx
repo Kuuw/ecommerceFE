@@ -15,6 +15,27 @@ import Orders from './components/pages/Orders';
 import ProductDetail from './components/pages/ProductDetail';
 import SignUp from './components/pages/SignUp';
 import Home from './components/pages/Home';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
+import { JwtPayloadExtend } from './types/JwtPayloadExtend';
+import AdminMenu from './components/pages/Admin/AdminMenu';
+import AdminCategory from './components/pages/Admin/Category/AdminCategory';
+import AdminCategoryEdit from './components/pages/Admin/Category/AdminCategoryEdit';
+import AdminCategoryAdd from './components/pages/Admin/Category/AdminCategoryAdd';
+import AdminCountry from './components/pages/Admin/Country/AdminCountry';
+import AdminCountryAdd from './components/pages/Admin/Country/AdminCountryAdd';
+import AdminCountryEdit from './components/pages/Admin/Country/AdminCountryEdit';
+import AdminProduct from './components/pages/Admin/Product/AdminProduct';
+import AdminProductAdd from './components/pages/Admin/Product/AdminProductAdd';
+import AdminProductEdit from './components/pages/Admin/Product/AdminProductEdit';
+import AdminShipmentCompany from './components/pages/Admin/AdminShipmentCompany/AdminShipmentCompany';
+import AdminShipmentCompanyAdd from './components/pages/Admin/AdminShipmentCompany/AdminShipmentCompanyAdd';
+import AdminShipmentCompanyEdit from './components/pages/Admin/AdminShipmentCompany/AdmnShipmentCompanyEdit';
+import AdminProductImage from './components/pages/Admin/Product/AdminProductImage';
+import AdminProductStock from './components/pages/Admin/Product/AdminProductStock';
+
+const token = Cookies.get('token');
+const isAdmin = token ? jwtDecode<JwtPayloadExtend>(token)['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'] === 'Admin' : false;
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -37,6 +58,25 @@ createRoot(document.getElementById('root')!).render(
             <Route path="/cart" element={<Cart />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/products/detail/:productId" element={<ProductDetail />} />
+            {isAdmin &&
+              <>
+                <Route path="/admin" element={<AdminMenu />} />
+                <Route path="/admin/category" element={<AdminCategory />} />
+                <Route path="/admin/category/edit/:categoryId" element={<AdminCategoryEdit />} />
+                <Route path="/admin/category/add" element={<AdminCategoryAdd />} />
+                <Route path="/admin/country" element={<AdminCountry />} />
+                <Route path="/admin/country/edit/:countryId" element={<AdminCountryEdit />} />
+                <Route path="/admin/country/add" element={<AdminCountryAdd />} />
+                <Route path="/admin/product" element={<AdminProduct />} />
+                <Route path="/admin/product/add" element={<AdminProductAdd />} />
+                <Route path="/admin/product/edit/:productId" element={<AdminProductEdit />} />
+                <Route path="/admin/product/image/:productId" element={<AdminProductImage />} />
+                <Route path="/admin/product/stock/:productId" element={<AdminProductStock />} />
+                <Route path="/admin/shipment-company" element={<AdminShipmentCompany />} />
+                <Route path="/admin/shipment-company/add" element={<AdminShipmentCompanyAdd />} />
+                <Route path="/admin/shipment-company/edit/:shipmentCompanyId" element={<AdminShipmentCompanyEdit />} />
+              </>
+            }
           </Routes>
           <FooterComponent />
         </Suspense>

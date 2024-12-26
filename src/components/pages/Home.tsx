@@ -90,9 +90,9 @@ const Home: React.FC = () => {
             <Filters
                 search={search}
                 setSearch={setSearch}
-                minPrice={minPrice ?? null}
+                minPrice={minPrice}
                 setMinPrice={setMinPrice}
-                maxPrice={maxPrice ?? 0}
+                maxPrice={maxPrice}
                 setMaxPrice={setMaxPrice}
                 category={category}
                 setCategory={setCategory}

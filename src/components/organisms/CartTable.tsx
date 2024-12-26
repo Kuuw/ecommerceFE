@@ -1,6 +1,6 @@
 import React from 'react';
 import { CartItem } from '../../types/CartItem';
-import CartTableHead from '../molecules/CartTableHead';
+import TableHead from '../molecules/TableHead';
 import CartTableBody from '../molecules/CartTableBody';
 
 interface CartTableProps {
@@ -12,7 +12,7 @@ interface CartTableProps {
 const CartTable: React.FC<CartTableProps> = ({ cartItems, updateCartItem, deleteCartItem }) => {
     return (
         <table className='table-auto w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400'>
-            <CartTableHead columns={["Product", "Price", "Quantity", "Total", "Remove"]} />
+            <TableHead columns={["Product", "Price", "Quantity", "Total", "Remove"]} />
             <CartTableBody cartItems={cartItems} updateCartItem={updateCartItem} deleteCartItem={deleteCartItem} />
         </table>
     );
