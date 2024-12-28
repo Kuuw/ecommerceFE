@@ -19,9 +19,9 @@ export const ShipmentCompanyTableBody: React.FC<ShipmentCompanyTableBodyProps> =
         <tbody>
             {shipmentCompanies.map((company) => (
                 <tr key={company.shipmentCompanyId} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td className="pl-3 py-2">{company.companyName}</td>
-                    <td className="pl-3 py-2">{company.companySite}</td>
-                    <td className="pl-3 py-2">
+                    <td className="pl-3 py-2 text-center text-black dark:text-white border">{company.companyName}</td>
+                    <td className="pl-3 py-2 text-center text-black dark:text-white border">{company.companySite}</td>
+                    <td className="pl-3 py-2 text-center text-black dark:text-white border">
                         <Button
                             onClick={() => navigate(`/admin/shipment-company/edit/${company.shipmentCompanyId}`)}
                             style={ButtonStyles.BLUE}
@@ -29,7 +29,7 @@ export const ShipmentCompanyTableBody: React.FC<ShipmentCompanyTableBodyProps> =
                             Edit
                         </Button>
                     </td>
-                    <td className="pl-3 py-2">
+                    <td className="pl-3 py-2 text-center text-black dark:text-white border">
                         <Button
                             onClick={() => deleteShipmentCompany(company.shipmentCompanyId ?? 0)}
                             style={ButtonStyles.RED}

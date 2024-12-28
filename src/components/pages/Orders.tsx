@@ -48,11 +48,11 @@ const Orders: React.FC = () => {
         <div className='m-5'>
             <div className='flex flex-wrap'>
                 {orders.map((order) => (
-                    <div key={order.orderId} className="bg-slate-900 dark:bg-dark-2 rounded-lg p-4 mb-4 mr-4 max-w-[500px] flex-shrink-0">
+                    <div key={order.orderId} className="dark:bg-slate-900 bg-gray-200 dark:bg-dark-2 rounded-lg p-4 mb-4 mr-4 max-w-[500px] flex-shrink-0">
                         <div className="flex justify-between">
                             <div>
-                                <h3 className="text-lg font-semibold mr-2">Order ID: {order.orderId}</h3>
-                                <p className="text-sm">Total Price: {calculateTotalPrice(order)}₺</p>
+                                <h3 className="text-lg font-semibold mr-2 dark:text-white text-black">Order ID: {order.orderId}</h3>
+                                <p className="text-sm dark:text-white text-black">Total Price: {calculateTotalPrice(order)}₺</p>
                             </div>
                             <div>
                                 <Button style={ButtonStyles.BLUE} className='ml-2' onClick={() => navigate(`/orders/detail/${order.orderId}`)}>Details</Button>

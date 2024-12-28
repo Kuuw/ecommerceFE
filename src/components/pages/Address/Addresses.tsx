@@ -51,12 +51,12 @@ const Addresses: React.FC = () => {
             <Button onClick={() => navigate('/account/addresses/add')} style={ButtonStyles.BLUE}>Add Address</Button>
             <div className="flex flex-wrap">
                 {addresses?.map((address) => (
-                    <div key={address.addressId} className="mt-3 mr-3 p-5 border border-slate-800 bg-slate-900 rounded-lg">
-                        <p>{address.firstName} {address.lastName}</p>
-                        <p><span className='text-blue-300 font-bold'>Adres Satırı 1:</span> {address.addressLine1}</p>
-                        <p><span className='text-blue-300 font-bold'>Adres Satırı 2:</span> {address.addressLine2}</p>
-                        <p><span className='text-blue-300 font-bold'>Posta Kodu:</span> {address.postalCode}</p>
-                        <p><span className='text-blue-300 font-bold'>Telefon:</span> {address.telephone}</p>
+                    <div key={address.addressId} className="mt-3 mr-3 p-5 border dark:border-slate-800 dark:bg-slate-900 rounded-lg bg-white border-gray-300">
+                        <p className='text-black dark:text-white'>{address.firstName} {address.lastName}</p>
+                        <p className='text-black dark:text-white'><span className='dark:text-blue-300 text-blue-700 font-bold'>Adres Satırı 1:</span> {address.addressLine1}</p>
+                        <p className='text-black dark:text-white'><span className='dark:text-blue-300 text-blue-700 font-bold'>Adres Satırı 2:</span> {address.addressLine2}</p>
+                        <p className='text-black dark:text-white'><span className='dark:text-blue-300 text-blue-700 font-bold'>Posta Kodu:</span> {address.postalCode}</p>
+                        <p className='text-black dark:text-white'><span className='dark:text-blue-300 text-blue-700 font-bold'>Telefon:</span> {address.telephone}</p>
                         <div className='mt-2'>
                             <Button onClick={() => navigate(`/account/addresses/edit/${address.addressId}`)} style={ButtonStyles.BLUE} className='mr-2'>Edit</Button>
                             <Button onClick={() => deleteAddress(address.addressId!)} style={ButtonStyles.RED}>Delete</Button>

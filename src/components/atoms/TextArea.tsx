@@ -20,7 +20,7 @@ const TextArea: React.FC<TextAreaProps> = ({ value, onChange, placeholder, rows 
                 placeholder={placeholder}
                 rows={rows}
                 cols={cols}
-                className={`rounded-lg p-2 ${className}`}
+                className={`rounded-lg p-2 dark:bg-slate-800 dark:text-white text-black bg-gray-200 ${className}`}
             />
         </div>
     );

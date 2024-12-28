@@ -7,6 +7,7 @@ import Cookies from 'js-cookie';
 import Button from '../atoms/Button';
 import ButtonStyles from '../../styles/ButtonStyles';
 import ProductImageElement from '../atoms/ProductImageElement';
+import TableHead from '../molecules/TableHead';
 
 const OrderDetail: React.FC = () => {
     const navigate = useNavigate();
@@ -55,23 +56,27 @@ const OrderDetail: React.FC = () => {
     }
 
     return (
-        <div className='m-5'>
-            <h2 className='text-2xl font-semibold mb-4'>Order Details</h2>
-            <p><strong>Order ID:</strong> {order.orderId}</p>
-            <p><strong>Address ID:</strong> {order.addressId}</p>
-            <p><strong>Shipment Company ID:</strong> {order.shipmentCompanyId}</p>
-            <p><strong>Shipment Tracking:</strong> {order.shipmentTrack}</p>
-            <h3 className='text-xl font-semibold mt-4'>Products</h3>
-            <ul>
+        <div className='p-10 pl-20'>
+            <Button style={ButtonStyles.BLUE} className='mb-5' onClick={() => navigate('/orders')}>Back to Orders</Button>
+            <h2 className='text-2xl font-semibold mb-4 dark:text-white text-black'>Order Details</h2>
+            <p className='dark:text-white text-black'><strong>Order ID:</strong> {order.orderId}</p>
+            <p className='dark:text-white text-black'><strong>Address:</strong> {order.address?.firstName} {order.address?.lastName} / {order.address?.postalCode}</p>
+            <p className='dark:text-white text-black'><strong>Shipment Tracking:</strong> {order.shipmentTrack}</p>
+            <h3 className='text-xl font-semibold mt-4 dark:text-white text-black'>Products</h3>
+            <table className='table-auto border-collapse border border-gray-200 w-1/2'>
+                <TableHead columns={['Image', 'Name', 'Quantity', 'Unit Price']} />
                 {order.orderItems.map((item) => (
-                    <li key={item.productId}>
-                        <ProductImageElement image={item.product.productImages?.[0]} className='w-12 h-12 inline-block mr-2' />
-                        Product: {item.product.name}, Quantity: {item.quantity}, Unit Price: {item.unitPrice}₺
-                    </li>
+                    <tr key={item.productId} className='border-b'>
+                        <td className='border border-gray-300 px-4 py-2 text-center dark:text-white text-black'>
+                            <ProductImageElement image={item.product?.productImages?.[0]} className='w-12 h-12 inline-block mr-2' />
+                        </td>
+                        <td className='border border-gray-300 px-4 py-2 text-center dark:text-white text-black'>{item.product?.name}</td>
+                        <td className='border border-gray-300 px-4 py-2 text-center dark:text-white text-black'>{item.quantity}</td>
+                        <td className='border border-gray-300 px-4 py-2 text-center dark:text-white text-black'>{item.unitPrice}₺</td>
+                    </tr>
                 ))}
-            </ul>
-            <p className='mt-4'><strong>Total Price:</strong> {calculateTotalPrice(order)}₺</p>
-            <Button style={ButtonStyles.BLUE} className='mt-4' onClick={() => navigate('/orders')}>Back to Orders</Button>
+            </table>
+            <p className='mt-4 dark:text-white text-black'><strong>Total Price:</strong> {calculateTotalPrice(order)}₺</p>
         </div>
     );
 };

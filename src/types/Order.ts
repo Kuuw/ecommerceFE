@@ -1,3 +1,4 @@
+import { Address } from './Address';
 import { OrderItem } from './OrderItem';
 
 export type Order = {
@@ -6,4 +7,5 @@ export type Order = {
     shipmentCompanyId?: number | null;
     shipmentTrack?: string | null;
     orderItems: OrderItem[];
+    address: Address | null;
 }

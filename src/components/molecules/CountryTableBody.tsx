@@ -15,14 +15,14 @@ export const CountryTableBody: React.FC<CountryTableBodyProps> = ({ countries, d
         <tbody>
             {countries.map((country) => (
                 <tr key={country.countryId} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                    <td className="pl-3 py-2">{country.countryName}</td>
-                    <td className="pl-3 py-2">{country.countryPhoneCode}</td>
-                    <td className="pl-3 py-2">
+                    <td className="pl-3 py-2 text-center text-black dark:text-white border">{country.countryName}</td>
+                    <td className="pl-3 py-2 text-center text-black dark:text-white border">{country.countryPhoneCode}</td>
+                    <td className="pl-3 py-2 text-center text-black dark:text-white border">
                         <Button onClick={() => navigate(`/admin/country/edit/${country.countryId}`)} style={ButtonStyles.BLUE}>
                             Edit
                         </Button>
                     </td>
-                    <td className="pl-3 py-2">
+                    <td className="pl-3 py-2 text-center text-black dark:text-white border">
                         <Button onClick={() => deleteCountry(country.countryId ?? 0)} style={ButtonStyles.RED}>
                             Remove
                         </Button>

@@ -5,6 +5,7 @@ import ButtonStyles from '../../../../styles/ButtonStyles';
 import { ProductImage } from '../../../../types/ProductImage';
 import { useParams } from 'react-router-dom';
 import AdminProductImageCard from '../../../organisms/AdminProductImageCard';
+import Input from '../../../atoms/Input';
 
 const AdminProductImage: React.FC = () => {
     const [images, setImages] = useState<ProductImage[]>([]);
@@ -57,8 +58,8 @@ const AdminProductImage: React.FC = () => {
     return (
         <div className="p-5 flex flex-col items-center">
             <Button onClick={() => window.history.back()} style={ButtonStyles.BLUE} className="mb-4"> Back </Button>
-            <h2>Manage Product Images</h2>
-            <input type="file" onChange={handleFileChange} />
+            <h2 className='dark:text-white text-black'>Manage Product Images</h2>
+            <Input type="file" value="" onChange={handleFileChange} className='my-2' />
             <Button onClick={handleAddImage} style={ButtonStyles.BLUE} disabled={!selectedFile}>
                 Add Image
             </Button>

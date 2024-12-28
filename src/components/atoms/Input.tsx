@@ -17,7 +17,7 @@ const Input: React.FC<InputProps> = ({ type, placeholder, name, value, onChange,
             value={value}
             name={name}
             onChange={onChange}
-            className={`p-2 rounded-lg ${className}`}
+            className={`p-2 rounded-lg bg-gray-200 text-black dark:bg-slate-800 dark:text-white ${className}`}
         />
     );
 };

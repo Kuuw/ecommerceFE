@@ -40,7 +40,7 @@ const AdminCategory: React.FC = () => {
                 Back to admin menu
             </Button>
             <div className='p-5'>
-                <h1 className='font-bold text-lg'>Admin Categories</h1>
+                <h1 className='font-bold text-lg text-black dark:text-white'>Admin Categories</h1>
                 <Button onClick={() => navigate('/admin/category/add')} className='m-3 h-10' style={ButtonStyles.GREEN}>Add Category</Button>
                 <CategoryTable categories={{ categories }} deleteCategory={deleteCategory} />
             </div>

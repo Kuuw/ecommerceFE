@@ -1,6 +1,8 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import InputBox from '../molecules/InputBox';
 import Input from '../atoms/Input';
+import Button from '../atoms/Button';
+import ButtonStyles from '../../styles/ButtonStyles';
 
 type SignInFormProps = {
     email: string;
@@ -28,10 +30,11 @@ const SignInForm: React.FC<SignInFormProps> = ({ email, setEmail, password, setP
                 value={password}
             />
             <div className="mt-10">
-                <Input
+                <Button
                     type="submit"
-                    value="Sign In"
-                    className="w-full cursor-pointer rounded-md border border-primary bg-primary px-5 py-3 text-base font-medium text-white transition hover:bg-opacity-90"
+                    children="Sign In"
+                    className="w-full cursor-pointer rounded-md border border-primary bg-primary px-5 py-3 text-base font-medium text-black dark:text-white transition hover:bg-opacity-90"
+                    style={ButtonStyles.BLUE}
                 />
             </div>
         </form>

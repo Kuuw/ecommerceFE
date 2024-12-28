@@ -45,14 +45,14 @@ const ProductDetail: React.FC = () => {
 
     return (
         <div className="m-10 w-full mt-48">
-            <div className='flex w-full'>
-                <div className='flex-col mr-10 ml-48'>
-                    <ProductImageElement image={product.productImages?.[0]} alt={product.name} className="max-w-[400px] ml-48" />
+            <div className='flex w-full align-middle justify-center'>
+                <div className='flex-col text-center'>
+                    <ProductImageElement image={product.productImages?.[0]} alt={product.name} className="max-w-[400px]" />
                 </div>
                 <div className='flex-col'>
-                    <h1 className="text-2xl font-bold">{product.name}</h1>
-                    <p className="text-lg">{product.description}</p>
-                    <p className="text-lg">{product.unitPrice}₺</p>
+                    <h1 className="text-2xl font-bold dark:text-white text-black">{product.name}</h1>
+                    <p className="text-lg dark:text-white text-black">{product.description}</p>
+                    <p className="text-lg dark:text-white text-black">{product.unitPrice}₺</p>
                     <div className='flex-row mt-5'>
                         <Button onClick={handleAddToCart} style={ButtonStyles.GREEN}>Add to cart</Button>
                     </div>

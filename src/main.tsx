@@ -2,7 +2,6 @@ import { StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import React from 'react';
 import Navbar from './components/organisms/Navbar';
 import { FooterComponent } from './components/organisms/Footer';
 import { Toaster } from 'react-hot-toast';
@@ -42,7 +41,7 @@ const isAdmin = token ? jwtDecode<JwtPayloadExtend>(token)['http://schemas.micro
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <React.Fragment>
+      <div className={`bg-white dark:bg-slate-950 min-h-screen`} id="app">
         <Navbar />
         <Toaster />
         <Suspense
@@ -84,7 +83,7 @@ createRoot(document.getElementById('root')!).render(
           </Routes>
           <FooterComponent />
         </Suspense>
-      </React.Fragment>
+      </div>
     </BrowserRouter>
   </StrictMode>
 );

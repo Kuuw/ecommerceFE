@@ -42,14 +42,9 @@ const Filters: React.FC<IProductFilter> = (props: IProductFilter) => {
 
     const categoryOptions = [{ value: undefined, label: "All" }, ...categories.map((category) => ({ value: category.categoryId?.toString()!, label: category.name }))];
 
-    const debouncedApplyFilter = useCallback(debounce(() => {
-        props.applyFilter();
-    }, 300), [props.applyFilter]);
-
     useEffect(() => {
-        debouncedApplyFilter();
-        return debouncedApplyFilter.cancel;
-    }, [props.search, props.minPrice, props.maxPrice, props.category, debouncedApplyFilter]);
+        props.applyFilter();
+    }, [props.search, props.minPrice, props.maxPrice, props.category]);
 
     return (
         <div className="flex justify-center">
@@ -57,16 +52,13 @@ const Filters: React.FC<IProductFilter> = (props: IProductFilter) => {
                 {/* Search box */}
                 <FormField label={"Search"} type={"text"} name={"Search"} value={props.search ?? ""} onChange={(e) => {
                     props.setSearch(e.target.value);
-                    debouncedApplyFilter();
                 }} />
                 {/* Price range */}
                 <FormField label="Minimum Price" type="text" name="Minimum Price" value={props.minPrice?.toString() ?? ""} onChange={(e) => {
                     props.setMinPrice(Number(e.target.value));
-                    debouncedApplyFilter();
                 }} />
                 <FormField label="Maximum Price" type="text" name="Maximum Price" value={props.maxPrice?.toString() ?? ""} onChange={(e) => {
                     props.setMaxPrice(Number(e.target.value));
-                    debouncedApplyFilter();
                 }} />
                 {/* Category filter */}
                 <div>
@@ -76,7 +68,6 @@ const Filters: React.FC<IProductFilter> = (props: IProductFilter) => {
                         value={props.category?.toString() ?? ""}
                         onChange={(e) => {
                             props.setCategory(Number(e.target.value));
-                            debouncedApplyFilter();
                         }}
                         options={categoryOptions}
                     />

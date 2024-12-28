@@ -35,12 +35,11 @@ const SignIn: React.FC = () => {
     };
 
     return (
-        <section className="bg-slate-950 py-20 dark:bg-dark lg:py-[120px]">
-
+        <section className="dark:bg-slate-950 bg-gray-200 py-20 dark:bg-dark lg:py-[120px]">
             <div className="container mx-auto">
                 <div className="-mx-4 flex flex-wrap">
                     <div className="w-full px-4">
-                        <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-slate-900 px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
+                        <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg dark:bg-slate-900 bg-gray-300 px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
                             <SignInForm
                                 email={email}
                                 setEmail={setEmail}
@@ -50,11 +49,11 @@ const SignIn: React.FC = () => {
                             />
                             <a
                                 href="/#"
-                                className="mb-2 inline-block text-base text-dark hover:text-primary hover:underline dark:text-white"
+                                className="mb-2 mt-4 inline-block text-base text-black hover:text-primary hover:underline dark:text-white"
                             >
                                 Forget Password?
                             </a>
-                            <p className="text-base text-body-color dark:text-dark-6">
+                            <p className="text-base text-body-color text-black dark:text-white">
                                 <span className="pr-0.5">Not a member yet?</span>
                                 <a
                                     href="/account/signup"

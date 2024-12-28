@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../atoms/Button';
+import ButtonStyles from '../../styles/ButtonStyles';
 
 interface PagingControllerProps {
     currentPage: number;
@@ -14,15 +15,17 @@ const PagingController: React.FC<PagingControllerProps> = ({ currentPage, totalP
             <Button
                 onClick={handlePreviousPage}
                 disabled={currentPage === 1}
-                className='paging-button text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'
+                className='paging-button mr-2'
+                style={ButtonStyles.GRAY}
             >
                 Previous
             </Button>
-            <span>Page {currentPage} of {totalPages}</span>
+            <span className='text-black dark:text-white'>Page {currentPage} of {totalPages}</span>
             <Button
                 onClick={handleNextPage}
                 disabled={currentPage === totalPages}
-                className='paging-button text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700'
+                className='paging-button'
+                style={ButtonStyles.GRAY}
             >
                 Next
             </Button>

@@ -86,7 +86,7 @@ const Home: React.FC = () => {
     };
 
     return (
-        <div className="px-10 mt-2 bg-slate-950">
+        <div className="px-10 mt-2 bg-white dark:bg-slate-950">
             <Filters
                 search={search}
                 setSearch={setSearch}

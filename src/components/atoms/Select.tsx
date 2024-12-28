@@ -13,7 +13,7 @@ const Select: React.FC<SelectProps> = ({ placeholder, options, value, onChange, 
         <select
             value={value}
             onChange={onChange}
-            className={`p-2 rounded-lg ${className}`}
+            className={`p-2 rounded-lg bg-gray-200 text-gray-700 dark:bg-slate-800 dark:text-white ${className}`}
         >
             {placeholder && <option value="" disabled>{placeholder}</option>}
             {options.map((option) => (
