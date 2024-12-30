@@ -7,6 +7,7 @@ import Button from '../atoms/Button';
 import ButtonStyles from '../../styles/ButtonStyles';
 import ProductImageElement from '../atoms/ProductImageElement';
 import { useParams } from 'react-router-dom';
+import ImageCarousel from '../molecules/ImageCarousel';
 
 const ProductDetail: React.FC = () => {
     const productService = new useProductService();
@@ -46,8 +47,8 @@ const ProductDetail: React.FC = () => {
     return (
         <div className="m-10 w-full mt-48">
             <div className='flex w-full align-middle justify-center'>
-                <div className='flex-col text-center'>
-                    <ProductImageElement image={product.productImages?.[0]} alt={product.name} className="max-w-[400px]" />
+                <div className='flex-col text-center mr-4 w-64'>
+                    <ImageCarousel images={product.productImages ?? [{ productImageId: "0", productId: 0, imagePath: import.meta.env.VITE_IMAGE_PLACEHOLDER, imageExtension: "jpg" }]} />
                 </div>
                 <div className='flex-col'>
                     <h1 className="text-2xl font-bold dark:text-white text-black">{product.name}</h1>
