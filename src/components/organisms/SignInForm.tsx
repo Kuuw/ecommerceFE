@@ -1,6 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import InputBox from '../molecules/InputBox';
-import Input from '../atoms/Input';
 import Button from '../atoms/Button';
 import ButtonStyles from '../../styles/ButtonStyles';
 

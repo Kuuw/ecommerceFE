@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import InputBox from '../molecules/InputBox';
-import Input from '../atoms/Input';
+import Button from '../atoms/Button';
+import ButtonStyles from '../../styles/ButtonStyles';
 
 type SignUpFormProps = {
     firstName: string;
@@ -46,11 +47,11 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ firstName, setFirstName, lastNa
                 value={password}
             />
             <div className="mb-10">
-                <Input
+                <Button
                     type="submit"
-                    value="Sign Up"
-                    className="w-full cursor-pointer rounded-md border border-primary bg-primary px-5 py-3 text-base font-medium text-white transition hover:bg-opacity-90"
-                />
+                    className="w-full cursor-pointer"
+                    style={ButtonStyles.BLUE}
+                >Sign Up</Button>
             </div>
         </form>
     );

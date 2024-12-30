@@ -32,11 +32,11 @@ const SignUp: React.FC = () => {
     };
 
     return (
-        <section className="bg-gray-1 py-20 dark:bg-dark lg:py-[120px]">
+        <section className="bg-gray-200 dark:bg-slate-800 py-20 dark:bg-dark lg:py-[120px]">
             <div className="container mx-auto">
                 <div className="-mx-4 flex flex-wrap">
                     <div className="w-full px-4">
-                        <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-slate-900 px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
+                        <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-gray-300 dark:bg-slate-900 px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
                             <SignUpForm
                                 firstName={firstName}
                                 setFirstName={setFirstName}
@@ -48,11 +48,11 @@ const SignUp: React.FC = () => {
                                 setPassword={setPassword}
                                 onSubmit={registerFunc}
                             />
-                            <p className="text-base text-body-color dark:text-dark-6">
+                            <p className="text-base text-body-color dark:text-white text-black">
                                 <span className="pr-0.5">Already a member?</span>
                                 <a
                                     href="/account/signin"
-                                    className="text-primary hover:underline"
+                                    className="text-blue-700 dark:text-blue-300 hover:underline"
                                 >
                                     Sign In
                                 </a>
