@@ -64,6 +64,10 @@ const Cart: React.FC = () => {
     };
 
     const updateCartItem = async (productId: number, quantity: number) => {
+        if (quantity <= 0) {
+            deleteCartItem(productId);
+            return;
+        }
         const data = await cartService.put({
             productId, quantity,
             product: undefined
@@ -94,14 +98,15 @@ const Cart: React.FC = () => {
                 throw new Error('Product ID is missing');
             }
             deleteCartItem(item.product.productId);
-            return { productId: item.product.productId, quantity: item.quantity, unitPrice: item.product.unitPrice };
+            return { productId: item.product.productId, quantity: item.quantity, unitPrice: item.product.unitPrice, product: null };
         });
 
         if (!items) {
             toast.error('No items in the cart');
             return;
         }
-        const data = await orderService.post({ orderId: null, addressId: addressId, shipmentCompanyId: null, shipmentTrack: null, orderItems: items });
+        const selectedAddress = addresses?.find(addr => addr.addressId === addressId) || null;
+        const data = await orderService.post({ orderId: null, addressId: addressId, shipmentCompanyId: null, shipmentTrack: null, orderItems: items, address: selectedAddress });
         if (data.status !== 200) {
             console.error('Response status:', data.status);
             toast.error('Error when creating order');
