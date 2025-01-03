@@ -60,7 +60,7 @@ const Profile: React.FC = () => {
     return (
         <div className='p-5 flex align-middle justify-center mt-5'>
             <div className='flex flex-col align-middle'>
-                <h1 className='font-bold text-2xl'>Profile ({isAdmin && "Admin" || "User"})</h1>
+                <h1 className='font-bold text-2xl text-black dark:text-white'>Profile ({isAdmin && "Admin" || "User"})</h1>
                 <form onSubmit={handleSubmit} style={{ width: '300px' }}>
                     <FormField
                         label="First Name"
