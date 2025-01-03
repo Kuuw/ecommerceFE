@@ -105,8 +105,7 @@ const Cart: React.FC = () => {
             toast.error('No items in the cart');
             return;
         }
-        const selectedAddress = addresses?.find(addr => addr.addressId === addressId) || null;
-        const data = await orderService.post({ orderId: null, addressId: addressId, shipmentCompanyId: null, shipmentTrack: null, orderItems: items, address: selectedAddress });
+        const data = await orderService.post({ orderId: null, addressId: addressId, shipmentCompanyId: null, shipmentTrack: null, orderItems: items, address: null });
         if (data.status !== 200) {
             console.error('Response status:', data.status);
             toast.error('Error when creating order');
