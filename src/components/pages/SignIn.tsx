@@ -35,11 +35,11 @@ const SignIn: React.FC = () => {
     };
 
     return (
-        <section className="dark:bg-slate-950 bg-gray-200 py-20 dark:bg-dark lg:py-[120px]">
+        <section className="dark:bg-slate-950 bg-white py-20 dark:bg-dark lg:py-[120px]">
             <div className="container mx-auto">
                 <div className="-mx-4 flex flex-wrap">
                     <div className="w-full px-4">
-                        <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg dark:bg-slate-900 bg-gray-300 px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
+                        <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg dark:bg-slate-900 bg-gray-200 px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
                             <SignInForm
                                 email={email}
                                 setEmail={setEmail}
@@ -57,7 +57,7 @@ const SignIn: React.FC = () => {
                                 <span className="pr-0.5">Not a member yet?</span>
                                 <a
                                     href="/account/signup"
-                                    className="text-primary hover:underline"
+                                    className="text-primary hover:underline text-blue-700 dark:text-blue-300"
                                 >
                                     Sign Up
                                 </a>

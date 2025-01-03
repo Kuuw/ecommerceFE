@@ -32,11 +32,11 @@ const SignUp: React.FC = () => {
     };
 
     return (
-        <section className="bg-gray-200 dark:bg-slate-800 py-20 dark:bg-dark lg:py-[120px]">
+        <section className="bg-white dark:bg-slate-800 py-20 dark:bg-dark lg:py-[120px]">
             <div className="container mx-auto">
                 <div className="-mx-4 flex flex-wrap">
                     <div className="w-full px-4">
-                        <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-gray-300 dark:bg-slate-900 px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
+                        <div className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-gray-200 dark:bg-slate-900 px-10 py-16 text-center dark:bg-dark-2 sm:px-12 md:px-[60px]">
                             <SignUpForm
                                 firstName={firstName}
                                 setFirstName={setFirstName}
