@@ -30,3 +30,27 @@ For Backend [Click Here](https://github.com/Kuuw/ecommerceAPI)
 ![Admin Menu](./screenshots/admin-menu.png)
 
 ![Admin Product](./screenshots/admin-product.png)
+
+## Running the Project
+
+To run the project locally, follow these steps:
+
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/your-username/ecommerceFE.git
+   cd ecommerceFE
+   ```
+
+2. **Install dependencies:**
+   ```sh
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```sh
+   npm run dev
+   ```
+
+## License
+
+This project is licensed under the MIT License.
