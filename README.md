@@ -37,7 +37,7 @@ To run the project locally, follow these steps:
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/your-username/ecommerceFE.git
+   git clone https://github.com/Kuuw/ecommerceFE.git
    cd ecommerceFE
    ```
 
