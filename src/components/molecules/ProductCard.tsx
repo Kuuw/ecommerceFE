@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import ProductImageElement from '../atoms/ProductImageElement';
 import Button from '../atoms/Button';
 import ButtonStyles from '../../styles/ButtonStyles';
+import { formatImagePath } from '../../utils/imagePathFormatter';
 
 interface ProductCardProps {
     product: Product;

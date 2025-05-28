@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ProductImage } from '../../types/ProductImage';
+import { formatImagePath } from '../../utils/imagePathFormatter';
 
 interface ImageCarouselProps {
     images: ProductImage[];
@@ -24,6 +25,12 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images }) => {
     if (!Array.isArray(images) || images.length === 0) {
         return null;
     }
+
+    // Ensure all images have valid paths
+    images = images.map(image => ({
+        ...image,
+        imagePath: formatImagePath(image.imagePath)
+    }));
 
     return (
         <div id="indicators-carousel" className="relative w-64 h-64" data-carousel="static">

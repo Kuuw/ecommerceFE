@@ -1,5 +1,6 @@
 import React from 'react';
 import type { ProductImage } from '../../types/ProductImage';
+import { formatImagePath } from '../../utils/imagePathFormatter';
 
 type ProductImageElementProps = {
     image?: ProductImage;
@@ -8,10 +9,12 @@ type ProductImageElementProps = {
 };
 
 const ProductImageElement: React.FC<ProductImageElementProps> = ({ image, className, alt }) => {
+    var path = image?.imagePath ? formatImagePath(image.imagePath) : import.meta.env.VITE_IMAGE_PLACEHOLDER;
+
     return (
         <div>
             <img
-                src={`${image?.imagePath ?? import.meta.env.VITE_IMAGE_PLACEHOLDER}`}
+                src={path}
                 alt={`Product image${alt && " of " + alt}`}
                 className={className}
             />
